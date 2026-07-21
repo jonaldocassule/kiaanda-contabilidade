@@ -353,6 +353,34 @@ footer p { margin: 0.5rem 0; color: rgba(255,255,255,0.7); }
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+
+  /* ── PÁGINA DE SERVIÇOS ── */
+#hero-servicos {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#processo {
+  max-width: 100%;
+  padding: 5rem 3rem;
+}
+
+#todos-servicos {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 3rem 5rem;
+}
+
+@media (max-width: 768px) {
+  #processo {
+    padding: 3rem 1.5rem;
+  }
+  
+  #todos-servicos {
+    padding: 0 1.5rem 3rem;
+  }
+}
   
   .servico-detalhe {
     padding: 3rem 1.5rem;
