@@ -282,79 +282,30 @@ footer p { margin: 0.5rem 0; color: rgba(255,255,255,0.7); }
 .blog-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; }
 .blog-link { color: var(--green); text-decoration: none; font-weight: 600; }
 
-/* ── PÁGINA DE SERVIÇOS DETALHADA ── */
+/* ── PÁGINA DE SERVIÇOS ── */
 #hero-servicos {
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
 }
 
-.servico-detalhe {
+#processo {
+  max-width: 100%;
   padding: 5rem 3rem;
+}
+
+#todos-servicos {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 3rem 5rem;
 }
 
-.servico-detalhe-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.servico-icon-large {
-  font-size: 4rem;
-  margin-bottom: 1.5rem;
-}
-
-.servico-detalhe-text h3 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin: 2rem 0 1rem;
-  color: var(--green);
-}
-
-.servico-lista {
-  list-style: none;
-  padding: 0;
-}
-
-.servico-lista li {
-  padding: 0.8rem 0;
-  padding-left: 2rem;
-  position: relative;
-  color: var(--text-muted);
-  border-bottom: 1px solid var(--border);
-}
-
-.servico-lista li::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: var(--green);
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-.servico-image-placeholder {
-  width: 100%;
-  aspect-ratio: 1;
-  background: linear-gradient(135deg, var(--green-dim), rgba(201,168,76,0.15));
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 6rem;
-  border: 2px solid var(--border);
-}
-
-@media (max-width: 900px) {
-  .servico-detalhe-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+@media (max-width: 768px) {
+  #processo {
+    padding: 3rem 1.5rem;
   }
   
-  .servico-detalhe {
-    padding: 3rem 1.5rem;
+  #todos-servicos {
+    padding: 0 1.5rem 3rem;
   }
 }
