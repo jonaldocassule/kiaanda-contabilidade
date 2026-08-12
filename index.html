@@ -1,267 +1,2256 @@
-<!DOCTYPE html>
-<html lang="pt-AO">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Kiaanda Contabilidade - Gabinete de Contabilidade e Consultoria Fiscal em Luanda, Angola." />
-  <title>Kiaanda Contabilidade | Consultoria Fiscal e Contabilística</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
-  
-  <style>
-    :root { --green: #1a6b3a; --green-light: #2d9b57; --green-dim: rgba(26,107,58,0.12); --gold: #C9A84C; --bg: #f7f5f0; --dark: #0d1f13; --text: #0d1f13; --text-muted: #5a6b61; --border: rgba(26,107,58,0.15); }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; line-height: 1.7; }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(247,245,240,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); transition: 0.3s; }
-    nav.scrolled { padding: 0.8rem 3rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--green); border-radius: 2px; }
-    .nav-mobile-open .nav-links { display: flex !important; }
-    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--green); text-decoration: none; }
-    .nav-logo span { color: var(--gold); }
-    .nav-subtitle { font-size: 0.6em; font-weight: 400; color: var(--text-muted); margin-left: 8px; font-family: 'DM Sans', sans-serif; }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
-    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: 0.3s; }
-    .nav-links a:hover { color: var(--green); }
-    .nav-cta { background: var(--green) !important; color: white !important; padding: 0.6rem 1.5rem; border-radius: 100px; }
-    #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 8rem 3rem 4rem; position: relative; gap: 4rem; }
-    .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #f7f5f0 0%, #e8f0eb 50%, #f7f5f0 100%); z-index: 0; }
-    .hero-left { position: relative; z-index: 1; }
-    .hero-badge { display: inline-flex; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); background: var(--green-dim); padding: 0.4rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; animation: fadeUp 0.8s ease both; }
-    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 1rem; animation: fadeUp 0.9s 0.1s ease both; }
-    .hero-title em { font-style: italic; color: var(--green); }
-    .hero-sub { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 550px; animation: fadeUp 1s 0.2s ease both; }
-    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 1.1s 0.3s ease both; }
-    .btn-green { background: var(--green); color: white; padding: 0.9rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 500; transition: 0.3s; display: inline-block; border: none; cursor: pointer; }
-    .btn-green:hover { background: var(--green-light); transform: translateY(-2px); }
-    .btn-outline-green { border: 1.5px solid var(--green); color: var(--green); padding: 0.9rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 500; transition: 0.3s; display: inline-block; background: transparent; }
-    .btn-outline-green:hover { background: var(--green-dim); }
-    .hero-right { position: relative; z-index: 1; animation: fadeUp 1s 0.2s ease both; }
-    .hero-image { width: 100%; aspect-ratio: 1; background: linear-gradient(135deg, var(--green-dim), rgba(201,168,76,0.15)); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 5rem; border: 2px solid var(--border); }
-    .stats-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 2rem; padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 3rem; }
-    .stat { text-align: center; }
-    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; color: var(--green); }
-    .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem; }
-    section { padding: 5rem 3rem; max-width: 1200px; margin: 0 auto; }
-    .section-label { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; font-weight: 600; }
-    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; }
-    .section-sub { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 3rem; max-width: 600px; }
-    .servicos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-    .servico-card { background: white; padding: 2.5rem; border-radius: 12px; border: 1px solid var(--border); transition: 0.3s; }
-    .servico-card:hover { border-color: var(--green); transform: translateY(-8px); box-shadow: 0 16px 48px var(--green-dim); }
-    .servico-icon { font-size: 2.5rem; margin-bottom: 1rem; }
-    .servico-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.8rem; }
-    .servico-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
-    .servico-link { color: var(--green); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
-    #sobre { background: var(--dark); color: white; max-width: 100%; padding: 5rem 3rem; }
-    .sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; max-width: 1200px; margin: 0 auto; }
-    .sobre-text p { color: rgba(255,255,255,0.8); margin-bottom: 1.5rem; }
-    .sobre-values { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    .value-card { background: rgba(255,255,255,0.08); padding: 1.8rem; border-radius: 12px; border: 1px solid rgba(201,168,76,0.2); transition: 0.3s; }
-    .value-card:hover { background: rgba(201,168,76,0.1); transform: translateY(-4px); }
-    .value-icon { font-size: 2rem; margin-bottom: 0.8rem; }
-    .value-title { font-weight: 600; color: var(--gold); margin-bottom: 0.5rem; }
-    .value-desc { color: rgba(255,255,255,0.7); font-size: 0.9rem; }
-    #contacto { background: var(--dark); color: white; max-width: 100%; padding: 5rem 3rem; }
-    .contacto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; max-width: 1200px; margin: 0 auto; }
-    .contacto-item { display: flex; gap: 1.2rem; padding: 1.5rem; background: rgba(255,255,255,0.08); border-radius: 12px; text-decoration: none; color: white; transition: 0.3s; margin-bottom: 1rem; }
-    .contacto-item:hover { background: rgba(201,168,76,0.15); transform: translateX(8px); }
-    .contacto-icon { font-size: 1.5rem; color: var(--gold); }
-    .contacto-label { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-bottom: 0.3rem; }
-    .contacto-value { font-weight: 600; }
-    .form-card { background: rgba(255,255,255,0.98); padding: 2.5rem; border-radius: 12px; color: var(--text); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
-    .form-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .form-group { margin-bottom: 1rem; }
-    .form-group label { display: block; font-weight: 600; margin-bottom: 0.4rem; font-size: 0.9rem; }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.9rem; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; background: var(--bg); }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px var(--green-dim); }
-    .btn-submit { width: 100%; background: var(--green); color: white; padding: 1rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; margin-top: 0.5rem; }
-    .btn-submit:hover { background: var(--green-light); transform: translateY(-2px); }
-    footer { background: #0a1410; color: white; padding: 3rem; text-align: center; border-top: 1px solid var(--border); }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; margin-bottom: 1rem; }
-    .footer-logo span { color: var(--gold); }
-    footer p { margin: 0.5rem 0; color: rgba(255,255,255,0.7); }
-    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
-    .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; transition: 0.3s; }
-    .footer-links a:hover { color: var(--gold); }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-    .reveal { opacity: 0; }
-    .reveal.visible { animation: fadeUp 0.8s ease both; }
-    @media (max-width: 900px) {
-      #hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; text-align: center; }
-      .hero-sub { margin: 0 auto 2.5rem; }
-      .hero-btns { justify-content: center; }
-      .hero-right { display: none; }
-      .sobre-grid, .contacto-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .sobre-values { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      .hamburger { display: flex; }
-      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 1rem; background: white; padding: 1.5rem; border-bottom: 1px solid var(--border); }
-      section { padding: 3rem 1.5rem; }
-      #sobre, #contacto { padding: 3rem 1.5rem; }
-      .form-row { grid-template-columns: 1fr; }
-      .stats-section { grid-template-columns: 1fr 1fr; }
-    }
-  </style>
-</head>
-<body>
-  <nav id="navbar">
-    <a href="#" class="nav-logo">Kia<span>anda</span> <span class="nav-subtitle">Contabilidade</span></a>
-    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="#hero">Início</a></li>
-      <li><a href="#servicos">Serviços</a></li>
-      <li><a href="#sobre">Sobre Nós</a></li>
-      <li><a href="#contacto" class="nav-cta">Pedir Orçamento</a></li>
-    </ul>
-  </nav>
+<parameter name="command">rewrite</parameter>
+<parameter name="content">
+    <!DOCTYPE html>
+    <html lang="pt-AO">
 
-  <section id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-left">
-      <div class="hero-badge">Gabinete Certificado em Angola</div>
-      <h1 class="hero-title">A sua contabilidade <em>organizada</em> e em dia com a AGT</h1>
-      <p class="hero-sub">Deixe a burocracia connosco. Oferecemos consultoria contabilística, fiscal e de recursos humanos para que se foque no crescimento do seu negócio.</p>
-      <div class="hero-btns">
-        <a href="#contacto" class="btn-green">Falar com um Contabilista</a>
-        <a href="#servicos" class="btn-outline-green">Ver Serviços</a>
-      </div>
-      <div class="stats-section">
-        <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Empresas Apoiadas</div></div>
-        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Conformidade Fiscal</div></div>
-        <div class="stat"><div class="stat-num">15+</div><div class="stat-label">Anos de Experiência</div></div>
-      </div>
-    </div>
-    <div class="hero-right"><div class="hero-image">📊</div></div>
-  </section>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#0B6E4F" />
 
-  <section id="servicos">
-    <div class="section-label reveal">O que oferecemos</div>
-    <h2 class="section-title reveal">Soluções <em style="color:var(--green)">Contabilísticas</em></h2>
-    <div class="servicos-grid">
-      <div class="servico-card reveal"><div class="servico-icon">📑</div><div class="servico-title">Contabilidade e Fiscalidade</div><p class="servico-desc">Escrituração contábil, Demonstrações Financeiras e submissão de declarações de IVA e IRC à AGT.</p></div>
-      <div class="servico-card reveal" style="animation-delay:0.1s"><div class="servico-icon">👥</div><div class="servico-title">Departamento Pessoal (RH)</div><p class="servico-desc">Processamento de salários, gestão de IRT, INSS e contratos de trabalho conforme a Lei Geral do Trabalho.</p></div>
-      <div class="servico-card reveal" style="animation-delay:0.2s"><div class="servico-icon">🏢</div><div class="servico-title">Constituição de Empresas</div><p class="servico-desc">Apoio completo na criação da sua empresa: NIF, alvará comercial, registo na AGT e conta bancária.</p></div>
-    </div>
-  </section>
+        <title>Kiaanda — Contabilidade que ajuda a sua empresa a crescer.</title>
+        <meta name="description"
+            content="Plataforma moderna de contabilidade, fiscalidade e gestão financeira para empresas e profissionais em Angola." />
+        <meta name="keywords"
+            content="contabilidade Angola, contabilista, fiscalidade, IVA, AGT, INSS, PGC Angola, Kiaanda, gestão financeira, salários" />
+        <meta name="author" content="Kiaanda" />
 
-  <section id="sobre">
-    <div class="sobre-grid">
-      <div class="sobre-text reveal">
-        <div class="section-label" style="color:var(--gold)">Sobre Nós</div>
-        <h2 class="section-title">Experiência e <em style="color:var(--gold)">Confiança</em></h2>
-        <p>A <strong>Kiaanda Contabilidade</strong> é um gabinete especializado em Luanda. A nossa equipa é liderada por contabilistas certificados, com profundo conhecimento da legislação angolana.</p>
-        <p>Transformamos a contabilidade de um "problema burocrático" numa ferramenta estratégica para o seu negócio.</p>
-      </div>
-      <div class="sobre-values reveal" style="animation-delay:0.15s">
-        <div class="value-card"><div class="value-icon">⚖️</div><div class="value-title">Conformidade Total</div><div class="value-desc">Cumprimento rigoroso de todas as obrigações fiscais.</div></div>
-        <div class="value-card"><div class="value-icon">🔒</div><div class="value-title">Confidencialidade</div><div class="value-desc">Sigilo absoluto sobre os seus dados financeiros.</div></div>
-      </div>
-    </div>
-  </section>
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="pt_AO" />
+        <meta property="og:title" content="Kiaanda — Contabilidade que ajuda a sua empresa a crescer." />
+        <meta property="og:description" content="Plataforma moderna de contabilidade para empresas em Angola." />
+        <meta property="og:site_name" content="Kiaanda" />
 
-  <section id="contacto">
-    <div class="contacto-grid">
-      <div class="contacto-info reveal">
-        <div class="section-label" style="color:var(--gold)">Contacte-nos</div>
-        <h2 class="section-title">Pronto para <em style="color:var(--gold)">organizar</em> as suas contas?</h2>
-        <a href="https://wa.me/244940040908" target="_blank" class="contacto-item">
-          <div class="contacto-icon">💬</div>
-          <div><div class="contacto-label">WhatsApp</div><div class="contacto-value">+244 940 040 908</div></div>
-        </a>
-        <a href="mailto:geral@kiaanda.co.ao" class="contacto-item">
-          <div class="contacto-icon">✉</div>
-          <div><div class="contacto-label">Email</div><div class="contacto-value">geral@kiaanda.co.ao</div></div>
-        </a>
-      </div>
-      <div class="reveal" style="animation-delay:0.15s">
-        <div class="form-card">
-          <div class="form-title">Pedir Orçamento Gratuito</div>
-          <form id="contactForm">
-            <div class="form-row">
-              <div class="form-group"><label>Nome</label><input type="text" name="nome" required /></div>
-              <div class="form-group"><label>Telefone</label><input type="tel" name="telefone" required /></div>
-            </div>
-            <div class="form-group"><label>Email</label><input type="email" name="email" required /></div>
-            <div class="form-group">
-              <label>Serviço</label>
-              <select name="servico" required>
-                <option value="">Selecciona uma opção</option>
-                <option>Contabilidade Mensal</option>
-                <option>Constituição de Empresa</option>
-                <option>Regularização Fiscal (AGT)</option>
-              </select>
-            </div>
-            <div class="form-group"><label>Mensagem</label><textarea name="mensagem" rows="4"></textarea></div>
-            <button type="submit" class="btn-submit">Enviar Pedido →</button>
-          </form>
+        <link rel="icon"
+            href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B6E4F'/%3E%3Cpath d='M11 9 L11 23 M11 16 L18 9 M11 16 L20 23' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='22' cy='9' r='2.5' fill='%23E6B54A'/%3E%3C/svg%3E" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+            rel="stylesheet" />
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            brand: {
+                                50: '#E6F4EF', 100: '#C2E4D6', 200: '#89C9AD', 300: '#4FAE84', 400: '#1E9464',
+                                500: '#0B6E4F', 600: '#095B41', 700: '#074732', 800: '#053424', 900: '#032015',
+                            },
+                            gold: {
+                                300: '#F0D28A', 400: '#EDC46A', 500: '#E6B54A', 600: '#C99A2E', 700: '#A57E20',
+                            },
+                            secondary: {
+                                50: '#E7F1EC', 100: '#C3DCCE', 200: '#87B99D', 300: '#4C9670',
+                                500: '#1E6B52', 600: '#175641', 700: '#114131',
+                            },
+                            bg: '#F7F9FB',
+                            ink: '#17212B',
+                            danger: '#C0392B',
+                            warning: '#D68910',
+                            success: '#1E8449',
+                        },
+                        fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    },
+                },
+            };
+        </script>
+
+        <script src="https://unpkg.com/lucide@latest"></script>
+
+        <style>
+            * {
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                font-family: 'Inter', system-ui, sans-serif;
+                background: #F7F9FB;
+                overflow-x: hidden;
+            }
+
+            section[id] {
+                scroll-margin-top: 80px;
+            }
+
+            /* ═══ NOME DA MARCA — GRADIENTE VERDE E DOURADO ═══ */
+            .brand-name {
+                background: linear-gradient(135deg, #0B6E4F 0%, #1E9464 40%, #E6B54A 100%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-weight: 800;
+                letter-spacing: -0.5px;
+            }
+
+            .brand-name-white {
+                background: linear-gradient(135deg, #FFFFFF 0%, #C2E4D6 50%, #E6B54A 100%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-weight: 800;
+                letter-spacing: -0.5px;
+            }
+
+            /* ═══ ANIMAÇÕES 3D ═══ */
+            @keyframes float {
+
+                0%,
+                100% {
+                    transform: translateY(0) rotate(0deg);
+                }
+
+                50% {
+                    transform: translateY(-25px) rotate(3deg);
+                }
+            }
+
+            @keyframes float-slow {
+
+                0%,
+                100% {
+                    transform: translateY(0) translateX(0) rotate(0deg);
+                }
+
+                33% {
+                    transform: translateY(-15px) translateX(10px) rotate(-2deg);
+                }
+
+                66% {
+                    transform: translateY(10px) translateX(-10px) rotate(2deg);
+                }
+            }
+
+            @keyframes float-reverse {
+
+                0%,
+                100% {
+                    transform: translateY(0) rotate(0deg);
+                }
+
+                50% {
+                    transform: translateY(20px) rotate(-4deg);
+                }
+            }
+
+            @keyframes rotate-3d {
+                from {
+                    transform: rotateY(0deg) rotateX(10deg);
+                }
+
+                to {
+                    transform: rotateY(360deg) rotateX(10deg);
+                }
+            }
+
+            @keyframes pulse-3d {
+
+                0%,
+                100% {
+                    transform: scale(1) translateZ(0);
+                    opacity: 0.4;
+                }
+
+                50% {
+                    transform: scale(1.1) translateZ(30px);
+                    opacity: 0.7;
+                }
+            }
+
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes fadeInScale {
+                from {
+                    opacity: 0;
+                    transform: scale(0.9);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+
+            @keyframes shimmer {
+                0% {
+                    background-position: -200% center;
+                }
+
+                100% {
+                    background-position: 200% center;
+                }
+            }
+
+            @keyframes tilt {
+
+                0%,
+                50%,
+                100% {
+                    transform: rotate(0deg);
+                }
+
+                25% {
+                    transform: rotate(1deg);
+                }
+
+                75% {
+                    transform: rotate(-1deg);
+                }
+            }
+
+            @keyframes glow {
+
+                0%,
+                100% {
+                    box-shadow: 0 0 20px rgba(230, 181, 74, 0.3);
+                }
+
+                50% {
+                    box-shadow: 0 0 60px rgba(230, 181, 74, 0.6);
+                }
+            }
+
+            .animate-float {
+                animation: float 6s ease-in-out infinite;
+            }
+
+            .animate-float-slow {
+                animation: float-slow 8s ease-in-out infinite;
+            }
+
+            .animate-float-reverse {
+                animation: float-reverse 7s ease-in-out infinite;
+            }
+
+            .animate-rotate-3d {
+                animation: rotate-3d 20s linear infinite;
+            }
+
+            .animate-pulse-3d {
+                animation: pulse-3d 4s ease-in-out infinite;
+            }
+
+            .fade-in-up {
+                animation: fadeInUp 0.8s ease-out;
+            }
+
+            .fade-in-scale {
+                animation: fadeInScale 0.6s ease-out;
+            }
+
+            .animate-glow {
+                animation: glow 3s ease-in-out infinite;
+            }
+
+            /* ═══ 3D PERSPECTIVE E CARDS ═══ */
+            .perspective-1000 {
+                perspective: 1000px;
+            }
+
+            .perspective-2000 {
+                perspective: 2000px;
+            }
+
+            .preserve-3d {
+                transform-style: preserve-3d;
+            }
+
+            .card-3d {
+                transform-style: preserve-3d;
+                transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .card-3d:hover {
+                transform: rotateY(-8deg) rotateX(5deg) scale(1.02);
+            }
+
+            .card-tilt {
+                transform: perspective(1000px) rotateY(-12deg) rotateX(8deg);
+                transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .card-tilt:hover {
+                transform: perspective(1000px) rotateY(-4deg) rotateX(2deg) scale(1.03);
+            }
+
+            .hover-lift {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .hover-lift:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 40px -10px rgba(11, 110, 79, 0.25);
+            }
+
+            /* ═══ FUNDO HERO 3D ═══ */
+            .hero-3d {
+                background:
+                    radial-gradient(circle at 20% 30%, rgba(230, 181, 74, 0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 70%, rgba(30, 148, 100, 0.2) 0%, transparent 50%),
+                    linear-gradient(135deg, #0B6E4F 0%, #074732 50%, #032015 100%);
+                position: relative;
+                overflow: hidden;
+            }
+
+            /* Formas flutuantes 3D */
+            .shape-3d {
+                position: absolute;
+                border-radius: 20%;
+                background: linear-gradient(135deg, rgba(230, 181, 74, 0.3), rgba(30, 148, 100, 0.3));
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            }
+
+            /* Grid 3D animado */
+            .grid-3d {
+                position: absolute;
+                inset: 0;
+                background-image:
+                    linear-gradient(rgba(230, 181, 74, 0.08) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(230, 181, 74, 0.08) 1px, transparent 1px);
+                background-size: 60px 60px;
+                transform: perspective(500px) rotateX(60deg);
+                transform-origin: center bottom;
+                mask-image: linear-gradient(to bottom, transparent, black 40%, black 60%, transparent);
+            }
+
+            /* Cubos 3D flutuantes */
+            .cube {
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                transform-style: preserve-3d;
+            }
+
+            .cube-face {
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                background: linear-gradient(135deg, rgba(230, 181, 74, 0.4), rgba(11, 110, 79, 0.4));
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(5px);
+            }
+
+            .cube-face-front {
+                transform: translateZ(30px);
+            }
+
+            .cube-face-back {
+                transform: translateZ(-30px) rotateY(180deg);
+            }
+
+            .cube-face-right {
+                transform: translateX(30px) rotateY(90deg);
+            }
+
+            .cube-face-left {
+                transform: translateX(-30px) rotateY(-90deg);
+            }
+
+            .cube-face-top {
+                transform: translateY(-30px) rotateX(90deg);
+            }
+
+            .cube-face-bottom {
+                transform: translateY(30px) rotateX(-90deg);
+            }
+
+            /* ═══ GLASSMORPHISM 3D ═══ */
+            .glass-card {
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                box-shadow:
+                    0 20px 60px rgba(0, 0, 0, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+
+            /* ═══ SHIMMER EFFECT ═══ */
+            .shimmer {
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+                background-size: 200% 100%;
+                animation: shimmer 3s infinite;
+            }
+
+            /* ═══ IMAGENS COM 3D ═══ */
+            .img-3d {
+                position: relative;
+                transform-style: preserve-3d;
+            }
+
+            .img-3d img {
+                border-radius: 20px;
+                box-shadow:
+                    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+                    0 0 0 1px rgba(11, 110, 79, 0.1);
+                transition: transform 0.6s ease, box-shadow 0.6s ease;
+            }
+
+            .img-3d:hover img {
+                transform: translateY(-10px) rotateY(-5deg);
+                box-shadow:
+                    0 35px 60px -15px rgba(11, 110, 79, 0.4),
+                    0 0 0 1px rgba(11, 110, 79, 0.2);
+            }
+
+            /* Scrollbar */
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: #E6F4EF;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #0B6E4F;
+                border-radius: 5px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #074732;
+            }
+
+            .mobile-menu {
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            }
+
+            .mobile-menu.active {
+                transform: translateX(0);
+            }
+
+            .view {
+                display: none;
+            }
+
+            .view.active {
+                display: block;
+            }
+
+            /* Sidebar do dashboard */
+            .sidebar-link {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                padding: 0.75rem 1rem;
+                border-radius: 0.75rem;
+                font-size: 0.875rem;
+                font-weight: 500;
+                color: #374151;
+                transition: all 0.2s;
+                cursor: pointer;
+            }
+
+            .sidebar-link:hover {
+                background: #E6F4EF;
+                color: #0B6E4F;
+            }
+
+            .sidebar-link.active {
+                background: #0B6E4F;
+                color: white;
+            }
+
+            .sidebar-link.active:hover {
+                background: #0B6E4F;
+                color: white;
+            }
+
+            .stat-card {
+                transition: all 0.3s;
+            }
+
+            .stat-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 15px 30px -5px rgba(11, 110, 79, 0.15);
+            }
+
+            .badge {
+                display: inline-flex;
+                align-items: center;
+                padding: 0.25rem 0.75rem;
+                border-radius: 9999px;
+                font-size: 0.75rem;
+                font-weight: 500;
+            }
+
+            .badge-pending {
+                background: #FEF3C7;
+                color: #92400E;
+            }
+
+            .badge-approved {
+                background: #D1FAE5;
+                color: #065F46;
+            }
+
+            .badge-rejected {
+                background: #FEE2E2;
+                color: #991B1B;
+            }
+
+            .badge-info {
+                background: #DBEAFE;
+                color: #1E40AF;
+            }
+
+            .badge-processing {
+                background: #E0E7FF;
+                color: #3730A3;
+            }
+
+            /* Gradiente animado nos títulos */
+            .gradient-text {
+                background: linear-gradient(120deg, #0B6E4F 0%, #E6B54A 50%, #0B6E4F 100%);
+                background-size: 200% auto;
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                animation: shimmer 4s linear infinite;
+            }
+
+            /* Números animados com efeito 3D */
+            .number-3d {
+                text-shadow:
+                    0 1px 0 #095B41,
+                    0 2px 0 #074732,
+                    0 3px 0 #053424,
+                    0 4px 0 #032015,
+                    0 5px 10px rgba(0, 0, 0, 0.4);
+            }
+
+            /* Barras de gráfico com 3D */
+            .bar-3d {
+                background: linear-gradient(to top, #0B6E4F, #1E9464);
+                box-shadow:
+                    inset -3px 0 0 rgba(0, 0, 0, 0.15),
+                    inset 3px 0 0 rgba(255, 255, 255, 0.15),
+                    0 4px 10px rgba(11, 110, 79, 0.3);
+                border-radius: 8px 8px 0 0;
+                transition: transform 0.3s;
+            }
+
+            .bar-3d:hover {
+                transform: scaleY(1.05);
+                background: linear-gradient(to top, #0B6E4F, #E6B54A);
+            }
+
+            /* Círculo decorativo com blur */
+            .blob {
+                position: absolute;
+                border-radius: 50%;
+                filter: blur(60px);
+                opacity: 0.6;
+                z-index: 0;
+            }
+
+            /* Card de imagem com moldura dourada */
+            .frame-gold {
+                padding: 3px;
+                background: linear-gradient(135deg, #E6B54A, #0B6E4F, #E6B54A);
+                border-radius: 24px;
+            }
+
+            .frame-gold img {
+                border-radius: 21px;
+                display: block;
+            }
+        </style>
+    </head>
+
+    <body class="antialiased text-ink flex flex-col min-h-screen">
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- SITE PÚBLICO -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <div id="publicSite" class="view active flex flex-col min-h-screen">
+
+            <!-- HEADER -->
+            <header id="header" class="sticky top-0 z-40 bg-white/95 backdrop-blur transition-all">
+                <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div class="flex h-16 lg:h-20 items-center justify-between">
+                        <a href="#top" class="flex items-center gap-2 group">
+                            <div class="relative">
+                                <svg width="42" height="42" viewBox="0 0 48 48" fill="none"
+                                    class="transition-transform group-hover:rotate-12 group-hover:scale-110">
+                                    <defs>
+                                        <linearGradient id="logoGrad" x1="0" y1="0" x2="48" y2="48">
+                                            <stop offset="0%" stop-color="#0B6E4F" />
+                                            <stop offset="100%" stop-color="#074732" />
+                                        </linearGradient>
+                                    </defs>
+                                    <rect width="48" height="48" rx="12" fill="url(#logoGrad)" />
+                                    <path d="M16 14 L16 34 M16 24 L26 14 M16 24 L30 34" stroke="white"
+                                        stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <circle cx="34" cy="14" r="3.5" fill="#E6B54A" />
+                                </svg>
+                            </div>
+                            <span class="text-2xl brand-name">Kiaanda</span>
+                        </a>
+
+                        <nav class="hidden lg:flex items-center gap-8">
+                            <a href="#servicos"
+                                class="text-sm font-medium text-gray-700 hover:text-brand-500 transition">Serviços</a>
+                            <a href="#solucoes"
+                                class="text-sm font-medium text-gray-700 hover:text-brand-500 transition">Soluções</a>
+                            <a href="#como-funciona"
+                                class="text-sm font-medium text-gray-700 hover:text-brand-500 transition">Como
+                                Funciona</a>
+                            <a href="#recursos"
+                                class="text-sm font-medium text-gray-700 hover:text-brand-500 transition">Recursos</a>
+                            <a href="#faq"
+                                class="text-sm font-medium text-gray-700 hover:text-brand-500 transition">FAQ</a>
+                            <a href="#contactos"
+                                class="text-sm font-medium text-gray-700 hover:text-brand-500 transition">Contactos</a>
+                        </nav>
+
+                        <div class="hidden lg:flex items-center gap-3">
+                            <button onclick="showLogin()"
+                                class="text-sm font-medium text-brand-500 hover:text-brand-600">
+                                Área do Cliente
+                            </button>
+                            <a href="#contactos"
+                                class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 px-5 py-2.5 text-sm font-semibold text-white transition shadow-lg hover:shadow-brand-500/30 hover:scale-105">
+                                Solicitar Orçamento
+                            </a>
+                        </div>
+
+                        <button id="menuBtn" class="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100"
+                            aria-label="Menu">
+                            <i data-lucide="menu" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="mobileMenu" class="mobile-menu fixed inset-0 z-50 lg:hidden bg-white">
+                    <div class="flex items-center justify-between p-4 border-b border-gray-100">
+                        <span class="text-xl brand-name">Kiaanda</span>
+                        <button id="closeMenu" class="p-2 rounded-lg hover:bg-gray-100" aria-label="Fechar">
+                            <i data-lucide="x" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                    <nav class="flex flex-col p-4 space-y-1">
+                        <a href="#servicos"
+                            class="mobile-link px-4 py-3 rounded-lg font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-500">Serviços</a>
+                        <a href="#solucoes"
+                            class="mobile-link px-4 py-3 rounded-lg font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-500">Soluções</a>
+                        <a href="#como-funciona"
+                            class="mobile-link px-4 py-3 rounded-lg font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-500">Como
+                            Funciona</a>
+                        <a href="#recursos"
+                            class="mobile-link px-4 py-3 rounded-lg font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-500">Recursos</a>
+                        <a href="#faq"
+                            class="mobile-link px-4 py-3 rounded-lg font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-500">FAQ</a>
+                        <a href="#contactos"
+                            class="mobile-link px-4 py-3 rounded-lg font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-500">Contactos</a>
+                        <div class="border-t border-gray-100 pt-4 mt-2 space-y-2">
+                            <button onclick="showLogin(); closeMobileMenu();"
+                                class="w-full flex items-center justify-center gap-2 rounded-full border-2 border-brand-500 px-6 py-3 font-semibold text-brand-500">
+                                <i data-lucide="log-in" class="w-4 h-4"></i> Área do Cliente
+                            </button>
+                            <a href="tel:+244942159354"
+                                class="flex items-center justify-center gap-2 rounded-full bg-brand-500 px-6 py-3 font-semibold text-white">
+                                <i data-lucide="phone" class="w-4 h-4"></i> 942 159 354
+                            </a>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+
+            <main id="top" class="flex-1">
+
+                <!-- ═══ HERO 3D ═══ -->
+                <section class="hero-3d text-white relative">
+                    <!-- Grid 3D no fundo -->
+                    <div class="grid-3d"></div>
+
+                    <!-- Formas 3D flutuantes -->
+                    <div class="shape-3d w-32 h-32 top-20 left-10 animate-float opacity-40"></div>
+                    <div class="shape-3d w-24 h-24 top-40 right-20 animate-float-slow opacity-30"
+                        style="border-radius: 50%;"></div>
+                    <div class="shape-3d w-40 h-40 bottom-20 left-1/4 animate-float-reverse opacity-20"></div>
+                    <div class="shape-3d w-20 h-20 top-1/2 right-1/3 animate-float opacity-30"
+                        style="border-radius: 50%;"></div>
+
+                    <!-- Cubos 3D -->
+                    <div class="cube top-32 right-10 animate-rotate-3d opacity-60">
+                        <div class="cube-face cube-face-front"></div>
+                        <div class="cube-face cube-face-back"></div>
+                        <div class="cube-face cube-face-right"></div>
+                        <div class="cube-face cube-face-left"></div>
+                        <div class="cube-face cube-face-top"></div>
+                        <div class="cube-face cube-face-bottom"></div>
+                    </div>
+                    <div class="cube bottom-40 left-16 animate-rotate-3d opacity-40"
+                        style="animation-duration: 30s; width: 40px; height: 40px;">
+                        <div class="cube-face cube-face-front" style="width:40px;height:40px;"></div>
+                        <div class="cube-face cube-face-back"
+                            style="width:40px;height:40px;transform: translateZ(-20px) rotateY(180deg);"></div>
+                    </div>
+
+                    <!-- Blobs coloridos -->
+                    <div class="blob bg-gold-500 w-96 h-96 -top-20 -right-20"></div>
+                    <div class="blob bg-brand-400 w-80 h-80 -bottom-40 -left-20"></div>
+
+                    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+                        <div class="grid lg:grid-cols-2 gap-12 py-20 lg:py-28 items-center">
+
+                            <div class="flex flex-col justify-center fade-in-up">
+                                <div
+                                    class="inline-flex w-fit items-center gap-2 rounded-full bg-white/10 backdrop-blur border border-white/20 px-4 py-2 text-sm mb-6 animate-glow">
+                                    <span class="w-2 h-2 rounded-full bg-gold-500 animate-pulse"></span>
+                                    Plataforma de contabilidade para Angola
+                                </div>
+
+                                <h1
+                                    class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-tight">
+                                    Contabilidade que ajuda a sua empresa a
+                                    <span
+                                        class="block bg-gradient-to-r from-gold-400 via-gold-500 to-gold-300 bg-clip-text text-transparent">crescer.</span>
+                                </h1>
+
+                                <p class="text-lg text-white/80 max-w-lg mb-8">
+                                    Tratamos da sua contabilidade, fiscalidade e gestão financeira para que possa
+                                    concentrar-se no crescimento do seu negócio.
+                                </p>
+
+                                <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                                    <a href="#contactos"
+                                        class="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-brand-900 px-8 py-4 text-lg font-semibold shadow-2xl hover:shadow-gold-500/50 hover:scale-105 transition-all">
+                                        Solicitar Orçamento
+                                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                                    </a>
+                                    <a href="https://wa.me/244951373837" target="_blank"
+                                        class="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 backdrop-blur border border-white/30 px-8 py-4 text-lg font-semibold hover:bg-white/20 hover:scale-105 transition-all">
+                                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                                        Falar com Especialista
+                                    </a>
+                                </div>
+
+                                <div class="flex flex-wrap gap-6 text-sm">
+                                    <div class="flex items-center gap-2 text-white/90">
+                                        <i data-lucide="check-circle-2" class="w-5 h-5 text-gold-500"></i>
+                                        Contabilistas certificados
+                                    </div>
+                                    <div class="flex items-center gap-2 text-white/90">
+                                        <i data-lucide="check-circle-2" class="w-5 h-5 text-gold-500"></i>
+                                        Portal online 24/7
+                                    </div>
+                                    <div class="flex items-center gap-2 text-white/90">
+                                        <i data-lucide="check-circle-2" class="w-5 h-5 text-gold-500"></i>
+                                        Sem custos ocultos
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Preview 3D com Tilt -->
+                            <div class="hidden lg:flex items-center justify-center perspective-2000">
+                                <div class="relative w-full max-w-md card-tilt">
+                                    <!-- Halo dourado -->
+                                    <div
+                                        class="absolute inset-0 rounded-3xl bg-gradient-to-br from-gold-500/40 to-brand-400/40 blur-3xl animate-pulse-3d">
+                                    </div>
+
+                                    <!-- Card principal -->
+                                    <div class="glass-card rounded-3xl p-6 relative preserve-3d">
+                                        <div class="flex items-center justify-between mb-5">
+                                            <div>
+                                                <p class="text-xs text-white/60 uppercase tracking-wider">Dashboard</p>
+                                                <p class="text-lg font-bold">Empresa ABC, Lda</p>
+                                            </div>
+                                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center font-bold text-lg shadow-lg"
+                                                style="transform: translateZ(20px);">K</div>
+                                        </div>
+
+                                        <!-- Estatísticas com efeito 3D -->
+                                        <div class="grid grid-cols-2 gap-3 mb-4">
+                                            <div class="rounded-xl bg-gradient-to-br from-white/20 to-white/5 p-4 border border-white/10 hover:scale-105 transition"
+                                                style="transform: translateZ(15px);">
+                                                <div class="flex items-center gap-2 mb-2">
+                                                    <i data-lucide="file-text" class="w-4 h-4 text-gold-500"></i>
+                                                    <p class="text-xs text-white/60">Documentos</p>
+                                                </div>
+                                                <p class="text-3xl font-bold text-gold-500 number-3d">12</p>
+                                                <p class="text-xs text-white/60 mt-1">↑ +3 este mês</p>
+                                            </div>
+                                            <div class="rounded-xl bg-gradient-to-br from-white/20 to-white/5 p-4 border border-white/10 hover:scale-105 transition"
+                                                style="transform: translateZ(15px);">
+                                                <div class="flex items-center gap-2 mb-2">
+                                                    <i data-lucide="calendar-clock" class="w-4 h-4 text-white"></i>
+                                                    <p class="text-xs text-white/60">Obrigações</p>
+                                                </div>
+                                                <p class="text-3xl font-bold number-3d">3</p>
+                                                <p class="text-xs text-white/60 mt-1">Próximas</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Gráfico 3D miniatura -->
+                                        <div class="rounded-xl bg-white/10 p-4 mb-4 border border-white/10"
+                                            style="transform: translateZ(10px);">
+                                            <p class="text-xs text-white/60 mb-3">Receitas — Últimos 6 meses</p>
+                                            <div class="flex items-end justify-between gap-1 h-16">
+                                                <div class="flex-1 bar-3d" style="height: 40%"></div>
+                                                <div class="flex-1 bar-3d" style="height: 60%"></div>
+                                                <div class="flex-1 bar-3d" style="height: 50%"></div>
+                                                <div class="flex-1 bar-3d" style="height: 75%"></div>
+                                                <div class="flex-1 bar-3d" style="height: 65%"></div>
+                                                <div class="flex-1 bar-3d"
+                                                    style="height: 90%; background: linear-gradient(to top, #E6B54A, #EDC46A);">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="space-y-2">
+                                            <div
+                                                class="flex items-center justify-between rounded-lg bg-white/10 p-3 text-xs border border-white/10">
+                                                <span class="text-white/80">IVA — 20 Nov</span>
+                                                <span
+                                                    class="px-2 py-1 rounded-full bg-gold-500/20 text-gold-500 font-medium">A
+                                                    vencer</span>
+                                            </div>
+                                            <div
+                                                class="flex items-center justify-between rounded-lg bg-white/10 p-3 text-xs border border-white/10">
+                                                <span class="text-white/80">Fatura #245</span>
+                                                <span
+                                                    class="px-2 py-1 rounded-full bg-brand-400/30 text-white font-medium">Aprovada</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Elementos flutuantes ao redor -->
+                                    <div class="absolute -top-6 -right-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-gold-400 to-gold-600 shadow-2xl animate-float flex items-center justify-center"
+                                        style="transform: translateZ(50px);">
+                                        <i data-lucide="trending-up" class="w-8 h-8 text-white"></i>
+                                    </div>
+                                    <div class="absolute -bottom-4 -left-4 w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-400 to-brand-600 shadow-2xl animate-float-reverse flex items-center justify-center"
+                                        style="transform: translateZ(40px);">
+                                        <i data-lucide="check-circle" class="w-7 h-7 text-white"></i>
+                                    </div>
+                                    <div
+                                        class="absolute top-1/3 -left-8 w-12 h-12 rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl animate-float-slow flex items-center justify-center">
+                                        <i data-lucide="receipt" class="w-6 h-6 text-gold-500"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ═══ CONFIANÇA COM IMAGEM ═══ -->
+                <section class="py-16 lg:py-24 bg-white relative overflow-hidden">
+                    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+                            <div class="perspective-1000">
+                                <div class="frame-gold animate-float hover-lift">
+                                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&auto=format&fit=crop&q=80"
+                                        alt="Contabilidade" class="w-full h-auto" loading="lazy"
+                                        onerror="this.src='data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 600%22%3E%3Crect fill=%22%230B6E4F%22 width=%22800%22 height=%22600%22/%3E%3Ctext x=%22400%22 y=%22300%22 text-anchor=%22middle%22 fill=%22%23E6B54A%22 font-size=%2260%22 font-family=%22Arial%22%3EKiaanda%3C/text%3E%3C/svg%3E'" />
+                                </div>
+                            </div>
+
+                            <div>
+                                <p class="text-sm font-semibold uppercase tracking-wider text-brand-500 mb-3">Confiança
+                                    comprovada</p>
+                                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                                    Números que
+                                    <span class="gradient-text">falam por si</span>
+                                </h2>
+                                <p class="text-lg text-gray-600 mb-8">
+                                    Anos de experiência ao serviço de empresas em Angola, com resultados que fazem a
+                                    diferença.
+                                </p>
+
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div
+                                        class="p-6 rounded-2xl bg-gradient-to-br from-brand-50 to-white border border-brand-100 hover-lift">
+                                        <p class="text-4xl font-bold text-brand-500 mb-1">+50</p>
+                                        <p class="text-sm text-gray-600">Clientes ativos</p>
+                                    </div>
+                                    <div
+                                        class="p-6 rounded-2xl bg-gradient-to-br from-gold-500/10 to-white border border-gold-500/20 hover-lift">
+                                        <p class="text-4xl font-bold text-gold-600 mb-1">+10</p>
+                                        <p class="text-sm text-gray-600">Anos experiência</p>
+                                    </div>
+                                    <div
+                                        class="p-6 rounded-2xl bg-gradient-to-br from-gold-500/10 to-white border border-gold-500/20 hover-lift">
+                                        <p class="text-4xl font-bold text-gold-600 mb-1">+1000</p>
+                                        <p class="text-sm text-gray-600">Processos</p>
+                                    </div>
+                                    <div
+                                        class="p-6 rounded-2xl bg-gradient-to-br from-brand-50 to-white border border-brand-100 hover-lift">
+                                        <p class="text-4xl font-bold text-brand-500 mb-1">98%</p>
+                                        <p class="text-sm text-gray-600">Satisfação</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ═══ SERVIÇOS ═══ -->
+                <section id="servicos" class="py-20 lg:py-28 relative">
+                    <div class="blob bg-brand-400 w-96 h-96 -top-20 -right-20 opacity-20"></div>
+                    <div class="blob bg-gold-500 w-80 h-80 bottom-0 -left-20 opacity-10"></div>
+
+                    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+                        <div class="text-center max-w-2xl mx-auto mb-16">
+                            <p class="text-sm font-semibold uppercase tracking-wider text-brand-500 mb-3">Serviços</p>
+                            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                                Soluções completas para
+                                <span class="gradient-text">o seu negócio</span>
+                            </h2>
+                            <p class="text-lg text-gray-600">Tudo o que a sua empresa precisa em contabilidade e gestão.
+                            </p>
+                        </div>
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 perspective-1000" id="services-grid"></div>
+                    </div>
+                </section>
+
+                <!-- ═══ ESTATÍSTICAS 3D ═══ -->
+                <section class="py-20 lg:py-28 hero-3d text-white relative overflow-hidden">
+                    <div class="grid-3d opacity-50"></div>
+                    <div class="shape-3d w-40 h-40 top-10 right-10 animate-float opacity-30"></div>
+                    <div class="shape-3d w-32 h-32 bottom-10 left-10 animate-float-slow opacity-20"></div>
+
+                    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+                        <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+                            <!-- Imagem 3D com estatísticas -->
+                            <div class="perspective-2000">
+                                <div class="relative card-tilt">
+                                    <!-- Card principal com estatísticas -->
+                                    <div class="glass-card rounded-3xl p-8 preserve-3d">
+                                        <div class="flex items-center justify-between mb-6">
+                                            <div>
+                                                <p class="text-xs text-white/60 uppercase tracking-wider">Relatório de
+                                                    Gestão</p>
+                                                <p class="text-2xl font-bold">Novembro 2024</p>
+                                            </div>
+                                            <div
+                                                class="px-3 py-1 rounded-full bg-gold-500/20 text-gold-500 text-xs font-medium border border-gold-500/30">
+                                                Ao vivo</div>
+                                        </div>
+
+                                        <!-- KPIs -->
+                                        <div class="grid grid-cols-2 gap-4 mb-6">
+                                            <div class="rounded-2xl bg-white/10 p-5 border border-white/10 hover-lift"
+                                                style="transform: translateZ(30px);">
+                                                <div class="flex items-center justify-between mb-2">
+                                                    <p class="text-xs text-white/60">Receitas</p>
+                                                    <span class="text-xs text-gold-500">↑ 18%</span>
+                                                </div>
+                                                <p class="text-2xl font-bold text-gold-500">4.85M</p>
+                                                <p class="text-xs text-white/60 mt-1">Kwanzas</p>
+                                            </div>
+                                            <div class="rounded-2xl bg-white/10 p-5 border border-white/10 hover-lift"
+                                                style="transform: translateZ(30px);">
+                                                <div class="flex items-center justify-between mb-2">
+                                                    <p class="text-xs text-white/60">Resultado</p>
+                                                    <span class="text-xs text-gold-500">↑ 24%</span>
+                                                </div>
+                                                <p class="text-2xl font-bold">2.51M</p>
+                                                <p class="text-xs text-white/60 mt-1">Kwanzas</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Gráfico 3D grande -->
+                                        <div class="rounded-2xl bg-white/10 p-5 border border-white/10"
+                                            style="transform: translateZ(20px);">
+                                            <div class="flex items-center justify-between mb-4">
+                                                <p class="text-sm font-medium">Evolução Mensal</p>
+                                                <div class="flex gap-3 text-xs">
+                                                    <span class="flex items-center gap-1"><span
+                                                            class="w-2 h-2 rounded-full bg-brand-400"></span>Receitas</span>
+                                                    <span class="flex items-center gap-1"><span
+                                                            class="w-2 h-2 rounded-full bg-gold-500"></span>Meta</span>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-end justify-between gap-2 h-32">
+                                                <div class="flex-1 flex flex-col items-center gap-1">
+                                                    <div class="w-full bar-3d" style="height: 55%"></div>
+                                                    <span class="text-xs text-white/50">Jul</span>
+                                                </div>
+                                                <div class="flex-1 flex flex-col items-center gap-1">
+                                                    <div class="w-full bar-3d" style="height: 65%"></div>
+                                                    <span class="text-xs text-white/50">Ago</span>
+                                                </div>
+                                                <div class="flex-1 flex flex-col items-center gap-1">
+                                                    <div class="w-full bar-3d" style="height: 45%"></div>
+                                                    <span class="text-xs text-white/50">Set</span>
+                                                </div>
+                                                <div class="flex-1 flex flex-col items-center gap-1">
+                                                    <div class="w-full bar-3d" style="height: 75%"></div>
+                                                    <span class="text-xs text-white/50">Out</span>
+                                                </div>
+                                                <div class="flex-1 flex flex-col items-center gap-1">
+                                                    <div class="w-full bar-3d"
+                                                        style="height: 95%; background: linear-gradient(to top, #E6B54A, #EDC46A);">
+                                                    </div>
+                                                    <span class="text-xs font-bold text-gold-500">Nov</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Elementos flutuantes 3D -->
+                                    <div class="absolute -top-8 -left-8 w-20 h-20 rounded-2xl bg-gradient-to-br from-gold-400 to-gold-600 shadow-2xl animate-float flex items-center justify-center"
+                                        style="transform: translateZ(60px) rotateY(-15deg);">
+                                        <i data-lucide="pie-chart" class="w-10 h-10 text-white"></i>
+                                    </div>
+                                    <div class="absolute -bottom-6 -right-6 w-24 h-24 rounded-2xl bg-gradient-to-br from-brand-400 to-brand-600 shadow-2xl animate-float-reverse flex items-center justify-center"
+                                        style="transform: translateZ(50px) rotateY(15deg);">
+                                        <i data-lucide="dollar-sign" class="w-12 h-12 text-white"></i>
+                                    </div>
+                                    <div
+                                        class="absolute top-1/4 -right-10 w-16 h-16 rounded-xl glass-card animate-float-slow flex items-center justify-center">
+                                        <i data-lucide="trending-up" class="w-8 h-8 text-gold-500"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <p class="text-sm font-semibold uppercase tracking-wider text-gold-500 mb-3">Tecnologia
+                                    moderna</p>
+                                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                                    Visualize o seu negócio em
+                                    <span
+                                        class="bg-gradient-to-r from-gold-400 to-gold-500 bg-clip-text text-transparent">tempo
+                                        real</span>
+                                </h2>
+                                <p class="text-lg text-white/80 mb-8">
+                                    Painéis interativos, gráficos claros e relatórios detalhados que ajudam a tomar
+                                    melhores decisões todos os dias.
+                                </p>
+
+                                <div class="space-y-4">
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class="w-12 h-12 rounded-xl bg-gold-500/20 border border-gold-500/30 flex items-center justify-center flex-shrink-0">
+                                            <i data-lucide="bar-chart-3" class="w-6 h-6 text-gold-500"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold mb-1">Relatórios visuais</h4>
+                                            <p class="text-sm text-white/70">Gráficos interativos que mostram a saúde da
+                                                empresa.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class="w-12 h-12 rounded-xl bg-brand-400/30 border border-brand-400/40 flex items-center justify-center flex-shrink-0">
+                                            <i data-lucide="smartphone" class="w-6 h-6 text-brand-200"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold mb-1">Acesso móvel</h4>
+                                            <p class="text-sm text-white/70">Consulte tudo pelo telemóvel, tablet ou
+                                                computador.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class="w-12 h-12 rounded-xl bg-gold-500/20 border border-gold-500/30 flex items-center justify-center flex-shrink-0">
+                                            <i data-lucide="bell" class="w-6 h-6 text-gold-500"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold mb-1">Alertas inteligentes</h4>
+                                            <p class="text-sm text-white/70">Nunca perca um prazo importante da AGT ou
+                                                INSS.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ═══ SOLUÇÕES ═══ -->
+                <section id="solucoes" class="border-y border-gray-100 bg-white py-20 lg:py-28">
+                    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div class="text-center max-w-2xl mx-auto mb-16">
+                            <p class="text-sm font-semibold uppercase tracking-wider text-brand-500 mb-3">Soluções</p>
+                            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                                Para todos os
+                                <span class="gradient-text">tamanhos de negócio</span>
+                            </h2>
+                            <p class="text-lg text-gray-600">Adaptamos o serviço à realidade da sua empresa.</p>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-6 perspective-1000" id="solutions-grid"></div>
+                    </div>
+                </section>
+
+                <!-- ═══ COMO FUNCIONA ═══ -->
+                <section id="como-funciona" class="py-20 lg:py-28 relative">
+                    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div class="text-center max-w-2xl mx-auto mb-16">
+                            <p class="text-sm font-semibold uppercase tracking-wider text-brand-500 mb-3">Como Funciona
+                            </p>
+                            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                                5 passos simples para
+                                <span class="gradient-text">começar</span>
+                            </h2>
+                        </div>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4" id="steps-grid"></div>
+                    </div>
+                </section>
+
+                <!-- ═══ IMAGEM + BENEFÍCIOS ═══ -->
+                <section class="bg-white border-y border-gray-100 py-20 lg:py-28">
+                    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+                            <div>
+                                <p class="text-sm font-semibold uppercase tracking-wider text-brand-500 mb-3">Benefícios
+                                </p>
+                                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                                    Porquê escolher a
+                                    <span class="brand-name">Kiaanda</span>
+                                </h2>
+                                <p class="text-lg text-gray-600 mb-8">
+                                    Combinamos experiência local com tecnologia moderna para simplificar a vida do
+                                    empresário angolano.
+                                </p>
+
+                                <div class="grid sm:grid-cols-2 gap-6" id="benefits-grid"></div>
+                            </div>
+
+                            <div class="perspective-1000 order-first lg:order-last">
+                                <div class="relative">
+                                    <!-- Imagem principal -->
+                                    <div class="frame-gold hover-lift animate-float">
+                                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&auto=format&fit=crop&q=80"
+                                            alt="Análise financeira" class="w-full h-auto" loading="lazy"
+                                            onerror="this.src='data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 600%22%3E%3Crect fill=%22%230B6E4F%22 width=%22800%22 height=%22600%22/%3E%3Ctext x=%22400%22 y=%22300%22 text-anchor=%22middle%22 fill=%22%23E6B54A%22 font-size=%2260%22%3EKiaanda%3C/text%3E%3C/svg%3E'" />
+                                    </div>
+
+                                    <!-- Card flutuante 3D -->
+                                    <div class="absolute -bottom-8 -left-8 bg-white rounded-2xl shadow-2xl p-4 border border-gray-100 animate-float-reverse hover-lift"
+                                        style="max-width: 220px;">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <div
+                                                class="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center">
+                                                <i data-lucide="check-circle-2" class="w-5 h-5 text-white"></i>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-gray-500">Fatura #245</p>
+                                                <p class="font-bold text-sm">Aprovada</p>
+                                            </div>
+                                        </div>
+                                        <p class="text-xs text-gray-500">Processado em 2min</p>
+                                    </div>
+
+                                    <!-- Card flutuante 3D 2 -->
+                                    <div
+                                        class="absolute -top-6 -right-6 bg-gradient-to-br from-gold-500 to-gold-600 rounded-2xl shadow-2xl p-4 text-white animate-float">
+                                        <p class="text-xs opacity-80 mb-1">Receita do mês</p>
+                                        <p class="text-2xl font-bold">Kz 4.8M</p>
+                                        <p class="text-xs opacity-80">↑ +18%</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ═══ TESTEMUNHOS ═══ -->
+                <section class="bg-gradient-to-br from-brand-50 to-white py-20 lg:py-28">
+                    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div class="text-center max-w-2xl mx-auto mb-16">
+                            <p class="text-sm font-semibold uppercase tracking-wider text-brand-500 mb-3">Testemunhos
+                            </p>
+                            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                                O que dizem os
+                                <span class="gradient-text">nossos clientes</span>
+                            </h2>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-6" id="testimonials-grid"></div>
+                    </div>
+                </section>
+
+                <!-- ═══ RECURSOS ═══ -->
+                <section id="recursos" class="py-20 lg:py-28">
+                    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div class="text-center max-w-2xl mx-auto mb-16">
+                            <p class="text-sm font-semibold uppercase tracking-wider text-brand-500 mb-3">Recursos</p>
+                            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                                Conhecimento à
+                                <span class="gradient-text">sua disposição</span>
+                            </h2>
+                        </div>
+                        <div class="grid md:grid-cols-4 gap-6" id="resources-grid"></div>
+                    </div>
+                </section>
+
+                <!-- ═══ FAQ ═══ -->
+                <section id="faq" class="bg-white border-y border-gray-100 py-20 lg:py-28">
+                    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div class="text-center max-w-2xl mx-auto mb-16">
+                            <p class="text-sm font-semibold uppercase tracking-wider text-brand-500 mb-3">FAQ</p>
+                            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                                Perguntas
+                                <span class="gradient-text">frequentes</span>
+                            </h2>
+                        </div>
+                        <div class="max-w-3xl mx-auto space-y-3" id="faq-list"></div>
+                    </div>
+                </section>
+
+                <!-- ═══ CONTACTOS ═══ -->
+                <section id="contactos" class="bg-bg py-20 lg:py-28 relative overflow-hidden">
+                    <div class="blob bg-brand-400 w-96 h-96 -top-20 -right-20 opacity-20"></div>
+                    <div class="blob bg-gold-500 w-80 h-80 bottom-0 -left-20 opacity-15"></div>
+
+                    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+                        <div class="text-center max-w-2xl mx-auto mb-16">
+                            <p class="text-sm font-semibold uppercase tracking-wider text-brand-500 mb-3">Contactos</p>
+                            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                                Solicitar
+                                <span class="gradient-text">Orçamento</span>
+                            </h2>
+                            <p class="text-lg text-gray-600">Preencha o formulário e a nossa equipa entrará em contacto
+                                em 24 horas.</p>
+                        </div>
+
+                        <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                            <div class="space-y-4">
+                                <a href="https://wa.me/244951373837" target="_blank"
+                                    class="flex items-start gap-4 rounded-2xl bg-white border border-gray-200 p-5 hover:border-brand-500 hover-lift transition">
+                                    <div
+                                        class="w-12 h-12 rounded-xl bg-[#25D366] text-white flex items-center justify-center flex-shrink-0 shadow-lg">
+                                        <i data-lucide="message-circle" class="w-6 h-6"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">WhatsApp</p>
+                                        <p class="font-bold text-gray-900">+244 951 373 837</p>
+                                    </div>
+                                </a>
+
+                                <a href="tel:+244942159354"
+                                    class="flex items-start gap-4 rounded-2xl bg-white border border-gray-200 p-5 hover:border-brand-500 hover-lift transition">
+                                    <div
+                                        class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 text-white flex items-center justify-center flex-shrink-0 shadow-lg">
+                                        <i data-lucide="phone" class="w-6 h-6"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Telefone</p>
+                                        <p class="font-bold text-gray-900">+244 942 159 354</p>
+                                        <p class="font-bold text-gray-900">+244 951 373 837</p>
+                                    </div>
+                                </a>
+
+                                <a href="mailto:geral@kiaanda.ao"
+                                    class="flex items-start gap-4 rounded-2xl bg-white border border-gray-200 p-5 hover:border-brand-500 hover-lift transition">
+                                    <div
+                                        class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 text-white flex items-center justify-center flex-shrink-0 shadow-lg">
+                                        <i data-lucide="mail" class="w-6 h-6"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Email</p>
+                                        <p class="font-bold text-gray-900">geral@kiaanda.ao</p>
+                                    </div>
+                                </a>
+
+                                <div class="flex items-start gap-4 rounded-2xl bg-white border border-gray-200 p-5">
+                                    <div
+                                        class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-500 to-gold-600 text-white flex items-center justify-center flex-shrink-0 shadow-lg">
+                                        <i data-lucide="map-pin" class="w-6 h-6"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Localização</p>
+                                        <p class="font-bold text-gray-900">Luanda, Angola</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4 rounded-2xl bg-white border border-gray-200 p-5">
+                                    <div
+                                        class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-500 to-gold-600 text-white flex items-center justify-center flex-shrink-0 shadow-lg">
+                                        <i data-lucide="clock" class="w-6 h-6"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Horário</p>
+                                        <p class="font-bold text-gray-900">Segunda a Sexta: 08h00 – 17h00</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-xl hover-lift">
+                                    <h3 class="text-2xl font-bold mb-2">Solicitar Orçamento</h3>
+                                    <p class="text-gray-600 mb-6">Respondemos em até 24 horas.</p>
+
+                                    <form id="contactForm" class="space-y-4">
+                                        <div class="grid sm:grid-cols-2 gap-4">
+                                            <div>
+                                                <label class="block text-sm font-medium text-gray-700 mb-2">Nome
+                                                    *</label>
+                                                <input name="name" required
+                                                    class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none"
+                                                    placeholder="O seu nome" />
+                                            </div>
+                                            <div>
+                                                <label
+                                                    class="block text-sm font-medium text-gray-700 mb-2">Empresa</label>
+                                                <input name="company"
+                                                    class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none"
+                                                    placeholder="Nome da empresa" />
+                                            </div>
+                                        </div>
+
+                                        <div class="grid sm:grid-cols-2 gap-4">
+                                            <div>
+                                                <label class="block text-sm font-medium text-gray-700 mb-2">Telefone /
+                                                    WhatsApp *</label>
+                                                <input name="phone" type="tel" required
+                                                    class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none"
+                                                    placeholder="+244 9XX XXX XXX" />
+                                            </div>
+                                            <div>
+                                                <label
+                                                    class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                                <input name="email" type="email"
+                                                    class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none"
+                                                    placeholder="email@exemplo.com" />
+                                            </div>
+                                        </div>
+
+                                        <div class="grid sm:grid-cols-2 gap-4">
+                                            <div>
+                                                <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de
+                                                    empresa</label>
+                                                <select name="companyType"
+                                                    class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none">
+                                                    <option value="">Selecione...</option>
+                                                    <option>Empresário Individual (ENI)</option>
+                                                    <option>Sociedade por Quotas (Lda)</option>
+                                                    <option>Sociedade Anónima (SA)</option>
+                                                    <option>Sociedade Unipessoal</option>
+                                                    <option>Outro</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm font-medium text-gray-700 mb-2">Nº de
+                                                    funcionários</label>
+                                                <select name="employees"
+                                                    class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none">
+                                                    <option value="">Selecione...</option>
+                                                    <option>1 - 5</option>
+                                                    <option>6 - 20</option>
+                                                    <option>21 - 50</option>
+                                                    <option>51 - 100</option>
+                                                    <option>+100</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Serviço
+                                                pretendido</label>
+                                            <select name="service"
+                                                class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none">
+                                                <option value="">Selecione...</option>
+                                                <option>Contabilidade</option>
+                                                <option>Fiscalidade</option>
+                                                <option>Gestão Financeira</option>
+                                                <option>Processamento Salarial</option>
+                                                <option>Constituição de Empresas</option>
+                                                <option>Consultoria</option>
+                                                <option>Vários serviços</option>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Mensagem
+                                                *</label>
+                                            <textarea name="message" required rows="4"
+                                                class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none"
+                                                placeholder="Descreva as suas necessidades..."></textarea>
+                                        </div>
+
+                                        <button type="submit"
+                                            class="w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 px-8 py-4 text-lg font-semibold text-white transition shadow-lg hover:shadow-brand-500/30 hover:scale-[1.02]">
+                                            <i data-lucide="send" class="w-5 h-5"></i>
+                                            Solicitar Orçamento
+                                        </button>
+
+                                        <p class="text-xs text-center text-gray-500">
+                                            Ao enviar, aceita a nossa <a href="#"
+                                                class="text-brand-500 underline">política de privacidade</a>.
+                                        </p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- ═══ FOOTER ═══ -->
+            <footer class="bg-gradient-to-br from-brand-900 to-brand-800 text-white relative overflow-hidden">
+                <div class="blob bg-brand-400 w-96 h-96 -top-20 -right-20 opacity-10"></div>
+                <div class="blob bg-gold-500 w-80 h-80 -bottom-40 -left-20 opacity-10"></div>
+
+                <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 py-16">
+                        <div>
+                            <div class="flex items-center gap-2 mb-4">
+                                <svg width="42" height="42" viewBox="0 0 48 48" fill="none">
+                                    <rect width="48" height="48" rx="12" fill="white" />
+                                    <path d="M16 14 L16 34 M16 24 L26 14 M16 24 L30 34" stroke="#0B6E4F"
+                                        stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <circle cx="34" cy="14" r="3.5" fill="#E6B54A" />
+                                </svg>
+                                <span class="text-2xl brand-name-white">Kiaanda</span>
+                            </div>
+                            <p class="text-sm text-white/70 leading-relaxed">
+                                Plataforma moderna de contabilidade, fiscalidade e gestão financeira para empresas em
+                                Angola.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="text-sm font-bold uppercase tracking-wider text-gold-500 mb-4">Serviços</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li><a href="#servicos"
+                                        class="text-white/70 hover:text-white transition">Contabilidade</a></li>
+                                <li><a href="#servicos"
+                                        class="text-white/70 hover:text-white transition">Fiscalidade</a></li>
+                                <li><a href="#servicos" class="text-white/70 hover:text-white transition">Gestão
+                                        Financeira</a></li>
+                                <li><a href="#servicos" class="text-white/70 hover:text-white transition">Processamento
+                                        Salarial</a></li>
+                                <li><a href="#servicos" class="text-white/70 hover:text-white transition">Constituição
+                                        de Empresas</a></li>
+                                <li><a href="#servicos"
+                                        class="text-white/70 hover:text-white transition">Consultoria</a></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="text-sm font-bold uppercase tracking-wider text-gold-500 mb-4">Empresa</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li><a href="#solucoes" class="text-white/70 hover:text-white transition">Soluções</a>
+                                </li>
+                                <li><a href="#como-funciona" class="text-white/70 hover:text-white transition">Como
+                                        Funciona</a></li>
+                                <li><a href="#recursos" class="text-white/70 hover:text-white transition">Recursos</a>
+                                </li>
+                                <li><a href="#faq" class="text-white/70 hover:text-white transition">FAQ</a></li>
+                                <li><a href="#contactos" class="text-white/70 hover:text-white transition">Contactos</a>
+                                </li>
+                                <li><button onclick="showLogin()" class="text-white/70 hover:text-white transition">Área
+                                        do Cliente</button></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="text-sm font-bold uppercase tracking-wider text-gold-500 mb-4">Contactos</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li><a href="https://wa.me/244951373837" target="_blank"
+                                        class="flex items-start gap-2 text-white/70 hover:text-white"><i
+                                            data-lucide="message-circle"
+                                            class="w-4 h-4 mt-0.5 flex-shrink-0"></i><span>+244 951 373 837</span></a>
+                                </li>
+                                <li><a href="tel:+244942159354"
+                                        class="flex items-start gap-2 text-white/70 hover:text-white"><i
+                                            data-lucide="phone" class="w-4 h-4 mt-0.5 flex-shrink-0"></i><span>+244 942
+                                            159 354</span></a></li>
+                                <li><a href="mailto:geral@kiaanda.ao"
+                                        class="flex items-start gap-2 text-white/70 hover:text-white"><i
+                                            data-lucide="mail"
+                                            class="w-4 h-4 mt-0.5 flex-shrink-0"></i><span>geral@kiaanda.ao</span></a>
+                                </li>
+                                <li class="flex items-start gap-2 text-white/70"><i data-lucide="map-pin"
+                                        class="w-4 h-4 mt-0.5 flex-shrink-0"></i><span>Luanda, Angola</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-white/10 py-6">
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/60">
+                            <p>© <span id="year"></span> <span class="brand-name-white">Kiaanda</span>. Todos os
+                                direitos reservados.</p>
+                            <div class="flex flex-wrap gap-4">
+                                <a href="#" class="hover:text-white">Política de Privacidade</a>
+                                <a href="#" class="hover:text-white">Termos de Uso</a>
+                                <a href="#" class="hover:text-white">Cookies</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+            <!-- WhatsApp Float -->
+            <a href="https://wa.me/244951373837?text=Ol%C3%A1%20Kiaanda%2C%20quero%20saber%20mais." target="_blank"
+                rel="noopener" aria-label="Falar no WhatsApp"
+                class="fixed bottom-6 right-6 z-40 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
+                <i data-lucide="message-circle" class="w-7 h-7 sm:w-8 sm:h-8"></i>
+                <span class="absolute inset-0 rounded-full bg-[#25D366] opacity-25 animate-ping"></span>
+            </a>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <footer>
-    <div class="footer-logo">Kia<span>anda</span> Contabilidade</div>
-    <p>© 2026 Kiaanda Contabilidade · Luanda, Angola</p>
-    <div class="footer-links">
-      <a href="#hero">Início</a>
-      <a href="#servicos">Serviços</a>
-      <a href="#contacto">Contacto</a>
-    </div>
-  </footer>
+        <!-- ═══ MODAL LOGIN ═══ -->
+        <div id="loginModal"
+            class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl max-w-md w-full p-8 shadow-2xl fade-in-scale">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-2">
+                        <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
+                            <rect width="48" height="48" rx="12" fill="#0B6E4F" />
+                            <path d="M16 14 L16 34 M16 24 L26 14 M16 24 L30 34" stroke="white" stroke-width="3.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <circle cx="34" cy="14" r="3.5" fill="#E6B54A" />
+                        </svg>
+                        <span class="text-lg brand-name">Kiaanda</span>
+                    </div>
+                    <button onclick="hideLogin()" class="text-gray-500 hover:text-gray-700">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
 
-  <script>
-    if (typeof emailjs !== 'undefined') emailjs.init('aKhzBfnlOkv5_pl6u');
-    function toggleMenu() {
-      const nav = document.querySelector('nav');
-      const links = document.getElementById('nav-links');
-      nav.classList.toggle('nav-mobile-open');
-      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
-    }
-    document.querySelectorAll('.nav-links a').forEach(a => {
-      a.addEventListener('click', () => {
-        document.getElementById('nav-links').style.display = 'none';
-        document.querySelector('nav').classList.remove('nav-mobile-open');
-      });
-    });
-    window.addEventListener('scroll', () => {
-      const navbar = document.getElementById('navbar');
-      if (window.scrollY > 50) navbar.classList.add('scrolled');
-      else navbar.classList.remove('scrolled');
-    });
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-    
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-      contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const btn = contactForm.querySelector('.btn-submit');
-        btn.textContent = 'A enviar...';
-        try {
-          await emailjs.send('service_8bjs998', 'template_wl6bh2c', {
-            nome: contactForm.nome.value,
-            telefone: contactForm.telefone.value,
-            email: contactForm.email.value,
-            servico: contactForm.servico.value,
-            mensagem: contactForm.mensagem.value,
-            to_email: 'jonaldopedro21@gmail.com'
-          });
-          alert('✓ Pedido enviado com sucesso! Entraremos em contacto em breve.');
-          contactForm.reset();
-        } catch (error) {
-          alert('✗ Erro ao enviar. Por favor, use o WhatsApp.');
-        }
-        btn.textContent = 'Enviar Pedido →';
-      });
-    }
-  </script>
-</body>
-</html>
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold mb-1">Área do Cliente</h2>
+                    <p class="text-sm text-gray-600">Aceda ao seu portal Kiaanda</p>
+                </div>
+
+                <form onsubmit="handleLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <input type="email" required value="cliente@empresa.ao"
+                            class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-brand-500 focus:outline-none" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <input type="password" required value="demo1234"
+                            class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-brand-500 focus:outline-none" />
+                    </div>
+
+                    <div class="flex items-center justify-between text-sm">
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" class="rounded border-gray-300 text-brand-500" />
+                            <span class="text-gray-600">Manter sessão</span>
+                        </label>
+                        <a href="#" class="text-brand-500 hover:underline">Esqueci a password</a>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full rounded-full bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 px-6 py-3 font-semibold text-white transition shadow-lg">
+                        Entrar
+                    </button>
+
+                    <div class="text-center pt-2">
+                        <p class="text-sm text-gray-600">Não tem conta?
+                            <button type="button" onclick="hideLogin(); scrollToContacts();"
+                                class="text-brand-500 font-medium hover:underline">
+                                Solicitar Orçamento
+                            </button>
+                        </p>
+                    </div>
+
+                    <div class="text-center pt-4 border-t border-gray-100">
+                        <p class="text-xs text-gray-500 mb-2">DEMO — clique para testar</p>
+                        <div class="flex gap-2 justify-center">
+                            <button type="button" onclick="loginAs('client')"
+                                class="text-xs px-3 py-1.5 rounded-full bg-brand-50 text-brand-600 hover:bg-brand-100">
+                                Entrar como Cliente
+                            </button>
+                            <button type="button" onclick="loginAs('admin')"
+                                class="text-xs px-3 py-1.5 rounded-full bg-gold-500/10 text-gold-700 hover:bg-gold-500/20">
+                                Entrar como Admin
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- ÁREA DO CLIENTE / BACKOFFICE -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <div id="dashboardApp" class="view min-h-screen bg-bg">
+
+            <header
+                class="lg:hidden sticky top-0 z-30 flex items-center justify-between bg-white border-b border-gray-200 px-4 h-16">
+                <div class="flex items-center gap-2">
+                    <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
+                        <rect width="48" height="48" rx="12" fill="#0B6E4F" />
+                        <path d="M16 14 L16 34 M16 24 L26 14 M16 24 L30 34" stroke="white" stroke-width="3.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <circle cx="34" cy="14" r="3.5" fill="#E6B54A" />
+                    </svg>
+                    <span class="brand-name">Kiaanda</span>
+                </div>
+                <button id="sidebarBtn" class="p-2 rounded-lg hover:bg-gray-100">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </header>
+
+            <div class="flex">
+                <aside id="sidebar"
+                    class="fixed lg:sticky top-0 left-0 z-40 w-64 h-screen bg-white border-r border-gray-200 -translate-x-full lg:translate-x-0 transition-transform">
+                    <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+                                <rect width="48" height="48" rx="12" fill="#0B6E4F" />
+                                <path d="M16 14 L16 34 M16 24 L26 14 M16 24 L30 34" stroke="white" stroke-width="3.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <circle cx="34" cy="14" r="3.5" fill="#E6B54A" />
+                            </svg>
+                            <span class="brand-name">Kiaanda</span>
+                        </div>
+                        <button onclick="toggleSidebar()" class="lg:hidden text-gray-500">
+                            <i data-lucide="x" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+
+                    <div class="p-4 border-b border-gray-100">
+                        <p class="text-xs text-gray-500 mb-1" id="userRoleLabel">Cliente</p>
+                        <p class="font-bold text-sm" id="userCompany">Empresa ABC, Lda</p>
+                    </div>
+
+                    <nav id="clientNav" class="p-3 space-y-1 overflow-y-auto" style="max-height: calc(100vh - 260px);">
+                        <div class="sidebar-link active" onclick="showPage('dashboard')"><i
+                                data-lucide="layout-dashboard" class="w-5 h-5"></i>Dashboard</div>
+                        <div class="sidebar-link" onclick="showPage('documentos')"><i data-lucide="file-text"
+                                class="w-5 h-5"></i>Documentos</div>
+                        <div class="sidebar-link" onclick="showPage('faturas')"><i data-lucide="receipt"
+                                class="w-5 h-5"></i>Faturas</div>
+                        <div class="sidebar-link" onclick="showPage('despesas')"><i data-lucide="credit-card"
+                                class="w-5 h-5"></i>Despesas</div>
+                        <div class="sidebar-link" onclick="showPage('obrigacoes')"><i data-lucide="calendar-clock"
+                                class="w-5 h-5"></i>Obrigações</div>
+                        <div class="sidebar-link" onclick="showPage('relatorios')"><i data-lucide="bar-chart-3"
+                                class="w-5 h-5"></i>Relatórios</div>
+                        <div class="sidebar-link" onclick="showPage('salarios')"><i data-lucide="users"
+                                class="w-5 h-5"></i>Salários</div>
+                        <div class="sidebar-link" onclick="showPage('mensagens')"><i data-lucide="message-square"
+                                class="w-5 h-5"></i>Mensagens</div>
+                        <div class="sidebar-link" onclick="showPage('pedidos')"><i data-lucide="inbox"
+                                class="w-5 h-5"></i>Pedidos</div>
+                        <div class="sidebar-link" onclick="showPage('empresas')"><i data-lucide="building-2"
+                                class="w-5 h-5"></i>Empresas</div>
+                        <div class="sidebar-link" onclick="showPage('equipa')"><i data-lucide="user-plus"
+                                class="w-5 h-5"></i>Equipa</div>
+                        <div class="sidebar-link" onclick="showPage('perfil')"><i data-lucide="settings"
+                                class="w-5 h-5"></i>Definições</div>
+                    </nav>
+
+                    <nav id="adminNav" class="p-3 space-y-1 overflow-y-auto hidden"
+                        style="max-height: calc(100vh - 260px);">
+                        <div class="sidebar-link active" onclick="showPage('admin-dashboard')"><i
+                                data-lucide="layout-dashboard" class="w-5 h-5"></i>Dashboard</div>
+                        <div class="sidebar-link" onclick="showPage('admin-clientes')"><i data-lucide="users"
+                                class="w-5 h-5"></i>Clientes</div>
+                        <div class="sidebar-link" onclick="showPage('admin-leads')"><i data-lucide="target"
+                                class="w-5 h-5"></i>Leads</div>
+                        <div class="sidebar-link" onclick="showPage('admin-empresas')"><i data-lucide="building-2"
+                                class="w-5 h-5"></i>Empresas</div>
+                        <div class="sidebar-link" onclick="showPage('admin-documentos')"><i data-lucide="file-text"
+                                class="w-5 h-5"></i>Documentos</div>
+                        <div class="sidebar-link" onclick="showPage('admin-obrigacoes')"><i data-lucide="calendar-clock"
+                                class="w-5 h-5"></i>Obrigações</div>
+                        <div class="sidebar-link" onclick="showPage('admin-mensagens')"><i data-lucide="message-square"
+                                class="w-5 h-5"></i>Mensagens</div>
+                        <div class="sidebar-link" onclick="showPage('admin-utilizadores')"><i data-lucide="user-cog"
+                                class="w-5 h-5"></i>Utilizadores</div>
+                        <div class="sidebar-link" onclick="showPage('admin-auditoria')"><i data-lucide="shield-check"
+                                class="w-5 h-5"></i>Auditoria</div>
+                        <div class="sidebar-link" onclick="showPage('admin-configuracoes')"><i data-lucide="settings"
+                                class="w-5 h-5"></i>Configurações</div>
+                    </nav>
+
+                    <div class="absolute bottom-0 left-0 right-0 p-3 border-t border-gray-100 bg-white">
+                        <div class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 mb-2">
+                            <div id="userAvatar"
+                                class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 text-white flex items-center justify-center font-bold">
+                                JS</div>
+                            <div class="min-w-0 flex-1">
+                                <p id="userName" class="text-sm font-medium truncate">João Silva</p>
+                                <p id="userEmail" class="text-xs text-gray-500 truncate">cliente@empresa.ao</p>
+                            </div>
+                        </div>
+                        <button onclick="logout()"
+                            class="w-full flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-danger hover:bg-red-50">
+                            <i data-lucide="log-out" class="w-4 h-4"></i>
+                            Terminar Sessão
+                        </button>
+                    </div>
+                </aside>
+
+                <main class="flex-1 min-w-0 lg:ml-0">
+                    <div id="pageContent" class="p-4 sm:p-6 lg:p-8"></div>
+                </main>
+            </div>
+        </div>
+
+        <!-- ═══ SCRIPTS ═══ -->
+        <script>
+            // ═══ DADOS ═══
+            const services = [
+                { icon: 'calculator', title: 'Contabilidade', desc: 'Gestão contabilística completa segundo o PGC angolano.' },
+                { icon: 'file-text', title: 'Fiscalidade', desc: 'Cumprimento das obrigações fiscais junto da AGT.' },
+                { icon: 'trending-up', title: 'Gestão Financeira', desc: 'Relatórios e indicadores para melhores decisões.' },
+                { icon: 'users', title: 'Processamento Salarial', desc: 'Salários, IRT, INSS e recibos de vencimento.' },
+                { icon: 'building-2', title: 'Constituição de Empresas', desc: 'Apoio completo no processo no GUE.' },
+                { icon: 'briefcase', title: 'Consultoria', desc: 'Acompanhamento estratégico personalizado.' },
+            ];
+
+            const solutions = [
+                { icon: 'store', title: 'Pequenas Empresas', desc: 'Solução acessível e adaptada para pequenos negócios em crescimento.', features: ['Contabilidade simplificada', 'IVA e obrigações fiscais', 'Salários até 10 funcionários', 'Portal online'] },
+                { icon: 'building', title: 'Empresas Médias', desc: 'Serviço completo para empresas com estrutura consolidada.', features: ['Contabilidade organizada', 'Gestão fiscal completa', 'Processamento salarial ilimitado', 'Relatórios de gestão'] },
+                { icon: 'user-check', title: 'Empresários', desc: 'Apoio individual para profissionais liberais e empresários.', features: ['IRT Grupo B', 'Contabilidade simplificada', 'Consultoria fiscal', 'Apoio contínuo'] },
+            ];
+
+            const steps = [
+                { num: '01', icon: 'phone-call', title: 'Contacte-nos', desc: 'Preencha o formulário ou envie mensagem no WhatsApp.' },
+                { num: '02', icon: 'users', title: 'Conhecemos', desc: 'Analisamos as necessidades da sua empresa.' },
+                { num: '03', icon: 'file-check', title: 'Proposta', desc: 'Apresentamos uma solução personalizada.' },
+                { num: '04', icon: 'handshake', title: 'Começamos', desc: 'Iniciamos o trabalho após aceitação.' },
+                { num: '05', icon: 'monitor', title: 'Acompanhe', desc: 'Consulte tudo pelo portal online 24/7.' },
+            ];
+
+            const benefits = [
+                { icon: 'zap', title: 'Menos Burocracia', desc: 'Simplificamos processos complexos.' },
+                { icon: 'folder-open', title: 'Documentos Organizados', desc: 'Tudo centralizado e acessível.' },
+                { icon: 'shield-check', title: 'Maior Controlo', desc: 'Visão clara das suas finanças.' },
+                { icon: 'headphones', title: 'Acompanhamento', desc: 'Comunicação próxima e frequente.' },
+            ];
+
+            const testimonials = [
+                { quote: 'Excelente serviço! A equipa é muito profissional e responde sempre rapidamente pelo WhatsApp.', author: 'Maria Santos', role: 'Gerente, Comércio Geral' },
+                { quote: 'Desde que trabalhamos com a Kiaanda, nunca mais nos preocupamos com prazos da AGT.', author: 'João Manuel', role: 'Sócio-gerente, Construção' },
+                { quote: 'O acompanhamento é próximo e as respostas são sempre claras. Recomendo vivamente.', author: 'Ana Ferreira', role: 'Diretora, Serviços' },
+            ];
+
+            const resources = [
+                { icon: 'book-open', title: 'Blog', desc: 'Artigos sobre contabilidade e gestão.' },
+                { icon: 'graduation-cap', title: 'Guias', desc: 'Manuais práticos para empresários.' },
+                { icon: 'help-circle', title: 'FAQ', desc: 'Respostas às dúvidas mais comuns.' },
+                { icon: 'library', title: 'Glossário', desc: 'Termos contabilísticos e fiscais.' },
+            ];
+
+            const faqs = [
+                { q: 'Que tipo de empresas atendem?', a: 'Trabalhamos com todos os tipos de empresas em Angola — ENI, Lda, SA, sociedades unipessoais, em diversos setores.' },
+                { q: 'Como funciona o portal do cliente?', a: 'Após contratação, recebe acesso ao portal onde pode enviar documentos, consultar relatórios, ver obrigações fiscais e comunicar connosco.' },
+                { q: 'Quanto custa o serviço?', a: 'Os preços dependem do volume de trabalho e serviços contratados. Envie-nos uma mensagem e preparamos proposta personalizada em 24-48h.' },
+                { q: 'Tratam de todos os impostos?', a: 'Sim. IVA, Imposto Industrial, IRT, retenções na fonte, comunicação de faturas à AGT e todas as obrigações fiscais aplicáveis.' },
+                { q: 'Fazem processamento salarial?', a: 'Sim. Salários, cálculo IRT e INSS, recibos de vencimento e mapas mensais.' },
+                { q: 'Podem abrir uma empresa?', a: 'Absolutamente. Tratamos de todo o processo no Guichê Único da Empresa (GUE).' },
+            ];
+
+            function renderServices() {
+                document.getElementById('services-grid').innerHTML = services.map((s, i) => `
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 hover-lift transition-all card-3d" style="animation-delay: ${i * 0.1}s">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-50 to-brand-100 text-brand-500 flex items-center justify-center mb-5 shadow-md">
+            <i data-lucide="${s.icon}" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">${s.title}</h3>
+          <p class="text-gray-600 mb-5">${s.desc}</p>
+          <a href="#contactos" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-500 hover:gap-3 transition-all">
+            Saber mais <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      `).join('');
+            }
+
+            function renderSolutions() {
+                document.getElementById('solutions-grid').innerHTML = solutions.map(s => `
+        <div class="rounded-2xl border border-gray-200 bg-white p-8 hover:border-brand-500 hover-lift transition card-3d">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary-500 to-brand-600 text-white flex items-center justify-center mb-5 shadow-lg">
+            <i data-lucide="${s.icon}" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">${s.title}</h3>
+          <p class="text-gray-600 mb-5">${s.desc}</p>
+          <ul class="space-y-2 mb-6">
+            ${s.features.map(f => `<li class="flex items-center gap-2 text-sm text-gray-700"><i data-lucide="check" class="w-4 h-4 text-secondary-500"></i>${f}</li>`).join('')}
+          </ul>
+          <a href="#contactos" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-500 hover:gap-3 transition-all">
+            Solicitar proposta <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      `).join('');
+            }
+
+            function renderSteps() {
+                document.getElementById('steps-grid').innerHTML = steps.map(s => `
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 relative hover-lift">
+          <div class="text-3xl font-bold text-brand-500/20 mb-3">${s.num}</div>
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-500 to-gold-600 text-white flex items-center justify-center mb-4 shadow-lg">
+            <i data-lucide="${s.icon}" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold mb-2">${s.title}</h3>
+          <p class="text-sm text-gray-600">${s.desc}</p>
+        </div>
+      `).join('');
+            }
+
+            function renderBenefits() {
+                document.getElementById('benefits-grid').innerHTML = benefits.map(b => `
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 text-white flex items-center justify-center flex-shrink-0 shadow-lg">
+            <i data-lucide="${b.icon}" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h4 class="text-base font-bold mb-1">${b.title}</h4>
+            <p class="text-sm text-gray-600">${b.desc}</p>
+          </div>
+        </div>
+      `).join('');
+            }
+
+            function renderTestimonials() {
+                document.getElementById('testimonials-grid').innerHTML = testimonials.map(t => `
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 hover-lift">
+          <i data-lucide="quote" class="w-8 h-8 text-gold-500 mb-4"></i>
+          <p class="text-gray-700 italic mb-6">"${t.quote}"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 text-white flex items-center justify-center font-bold text-sm">${t.author.split(' ').map(x => x[0]).join('')}</div>
+            <div>
+              <p class="font-bold text-gray-900">${t.author}</p>
+              <p class="text-xs text-gray-500">${t.role}</p>
+            </div>
+          </div>
+        </div>
+      `).join('');
+            }
+
+            function renderResources() {
+                document.getElementById('resources-grid').innerHTML = resources.map(r => `
+        <a href="#" class="rounded-2xl border border-gray-200 bg-white p-6 hover-lift transition-all block text-center">
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-brand-50 to-brand-100 text-brand-500 flex items-center justify-center mb-4 shadow-md">
+            <i data-lucide="${r.icon}" class="w-7 h-7"></i>
+          </div>
+          <h4 class="font-bold mb-2">${r.title}</h4>
+          <p class="text-sm text-gray-600">${r.desc}</p>
+        </a>
+      `).join('');
+            }
+
+            function renderFAQ() {
+                document.getElementById('faq-list').innerHTML = faqs.map((f, i) => `
+        <details ${i === 0 ? 'open' : ''} class="group overflow-hidden rounded-2xl border border-gray-200 bg-white hover:border-brand-200 transition">
+          <summary class="cursor-pointer flex items-center justify-between gap-4 p-6 hover:bg-gray-50 font-semibold">
+            <span>${f.q}</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-brand-500 flex-shrink-0 transition-transform group-open:rotate-180"></i>
+          </summary>
+          <div class="px-6 pb-6 text-gray-600 leading-relaxed">${f.a}</div>
+        </details>
+      `).join('');
+            }
+
+            const menuBtn = document.getElementById('menuBtn');
+            const closeMenu = document.getElementById('closeMenu');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            closeMenu.addEventListener('click', closeMobileMenu);
+            document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', closeMobileMenu));
+
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) header.classList.add('shadow-md');
+                else header.classList.remove('shadow-md');
+            });
+
+            document.getElementById('contactForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const data = new FormData(e.target);
+                let text = `*Novo Pedido de Orçamento — Kiaanda*\n\n`;
+                text += `*Nome:* ${data.get('name')}\n`;
+                if (data.get('company')) text += `*Empresa:* ${data.get('company')}\n`;
+                text += `*Telefone:* ${data.get('phone')}\n`;
+                if (data.get('email')) text += `*Email:* ${data.get('email')}\n`;
+                if (data.get('companyType')) text += `*Tipo:* ${data.get('companyType')}\n`;
+                if (data.get('employees')) text += `*Funcionários:* ${data.get('employees')}\n`;
+                if (data.get('service')) text += `*Serviço:* ${data.get('service')}\n`;
+                text += `\n*Mensagem:*\n${data.get('message')}`;
+                window.open(`https://wa.me/244951373837?text=${encodeURIComponent(text)}`, '_blank');
+            });
+
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // ═══ LOGIN ═══
+            let currentUser = null;
+
+            function showLogin() {
+                document.getElementById('loginModal').classList.remove('hidden');
+                document.getElementById('loginModal').classList.add('flex');
+                lucide.createIcons();
+            }
+
+            function hideLogin() {
+                document.getElementById('loginModal').classList.add('hidden');
+                document.getElementById('loginModal').classList.remove('flex');
+            }
+
+            function scrollToContacts() {
+                document.getElementById('contactos').scrollIntoView({ behavior: 'smooth' });
+            }
+
+            function handleLogin(e) {
+                e.preventDefault();
+                loginAs('client');
+            }
+
+            function loginAs(role) {
+                currentUser = role;
+                hideLogin();
+                document.getElementById('publicSite').classList.remove('active');
+                document.getElementById('dashboardApp').classList.add('active');
+
+                if (role === 'admin') {
+                    document.getElementById('userRoleLabel').textContent = 'Administrador';
+                    document.getElementById('userCompany').textContent = 'Kiaanda — Backoffice';
+                    document.getElementById('userName').textContent = 'Admin Kiaanda';
+                    document.getElementById('userEmail').textContent = 'admin@kiaanda.ao';
+                    document.getElementById('userAvatar').textContent = 'AK';
+                    document.getElementById('clientNav').classList.add('hidden');
+                    document.getElementById('adminNav').classList.remove('hidden');
+                    showPage('admin-dashboard');
+                } else {
+                    document.getElementById('userRoleLabel').textContent = 'Cliente';
+                    document.getElementById('userCompany').textContent = 'Empresa ABC, Lda';
+                    document.getElementById('userName').textContent = 'João Silva';
+                    document.getElementById('userEmail').textContent = 'cliente@empresa.ao';
+                    document.getElementById('userAvatar').textContent = 'JS';
+                    document.getElementById('clientNav').classList.remove('hidden');
+                    document.getElementById('adminNav').classList.add('hidden');
+                    showPage('dashboard');
+                }
+                window.scrollTo(0, 0);
+                lucide.createIcons();
+            }
+
+            function logout() {
+                currentUser = null;
+                document.getElementById('dashboardApp').classList.remove('active');
+                document.getElementById('publicSite').classList.add('active');
+                window.scrollTo(0, 0);
+            }
+
+            function toggleSidebar() {
+                document.getElementById('sidebar').classList.toggle('-translate-x-full');
+            }
+            document.getElementById('sidebarBtn').addEventListener('click', toggleSidebar);
+
+            // ═══ DASHBOARD PAGES ═══
+            function showPage(page) {
+                document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+                event?.currentTarget?.classList.add('active');
+
+                if (window.innerWidth < 1024) {
+                    document.getElementById('sidebar').classList.add('-translate-x-full');
+                }
+
+                const content = document.getElementById('pageContent');
+
+                const pages = {
+                    'dashboard': () => `
+          <div class="mb-6">
+            <h1 class="text-3xl font-bold mb-1">Olá, João! 👋</h1>
+            <p class="text-gray-600">Aqui está o resumo da sua empresa hoje.</p>
+          </div>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            ${[
+                            { label: 'Documentos Pendentes', value: '12', icon: 'file-clock', color: 'gold' },
+                            { label: 'Obrigações Próximas', value: '3', icon: 'calendar-clock', color: 'danger' },
+                            { label: 'Faturas do Mês', value: '24', icon: 'receipt', color: 'brand' },
+                            { label: 'Despesas do Mês', value: '18', icon: 'credit-card', color: 'secondary' },
+                        ].map(s => `
+              <div class="stat-card rounded-2xl border border-gray-200 bg-white p-5">
+                <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-3 ${s.color === 'gold' ? 'bg-gold-500/10 text-gold-600' : s.color === 'danger' ? 'bg-red-50 text-danger' : s.color === 'brand' ? 'bg-brand-50 text-brand-500' : 'bg-secondary-50 text-secondary-500'}">
+                  <i data-lucide="${s.icon}" class="w-5 h-5"></i>
+                </div>
+                <p class="text-sm text-gray-500 mb-1">${s.label}</p>
+                <p class="text-2xl font-bold">${s.value}</p>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-6 mb-6">
+            <div class="rounded-2xl border border-gray-200 bg-white p-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bold">Fluxo Financeiro — Novembro</h3>
+                <span class="badge badge-info">Este mês</span>
+              </div>
+              <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 rounded-xl bg-secondary-50">
+                  <span class="text-sm text-gray-700">Receitas</span>
+                  <span class="font-bold text-secondary-600">Kz 4.850.000</span>
+                </div>
+                <div class="flex items-center justify-between p-3 rounded-xl bg-red-50">
+                  <span class="text-sm text-gray-700">Despesas</span>
+                  <span class="font-bold text-danger">Kz 2.340.000</span>
+                </div>
+                <div class="flex items-center justify-between p-3 rounded-xl bg-brand-50 border-2 border-brand-200">
+                  <span class="text-sm font-medium text-gray-900">Resultado</span>
+                  <span class="font-bold text-brand-600 text-lg">Kz 2.510.000</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-2xl border border-gray-200 bg-white p-6">
+              <h3 class="font-bold mb-4">Próximas Obrigações</h3>
+              <div class="space-y-3">
+                ${[
+                            { name: 'IVA — Novembro', date: '20 Dez', days: 5, urgent: true },
+                            { name: 'Retenções IRT', date: '15 Dez', days: 12 },
+                            { name: 'INSS Novembro', date: '30 Nov', days: 20 },
+                        ].map(o => `
+                  <div class="flex items-center justify-between p-3 rounded-xl border border-gray-200">
+                    <div>
+                      <p class="font-medium text-sm">${o.name}</p>
+                      <p class="text-xs text-gray-500">${o.date}</p>
+                    </div>
+                    <span class="badge ${o.urgent ? 'badge-rejected' : 'badge-pending'}">${o.days} dias</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `,
+
+                    'documentos': () => `
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h1 class="text-3xl font-bold mb-1">Documentos</h1>
+              <p class="text-gray-600">Envie e gerir documentos da empresa.</p>
+            </div>
+            <button class="inline-flex items-center gap-2 rounded-full bg-brand-500 hover:bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white transition">
+              <i data-lucide="upload" class="w-4 h-4"></i>
+              Carregar
+            </button>
+          </div>
+
+          <div class="rounded-2xl border-2 border-dashed border-brand-200 bg-brand-50/50 p-8 text-center mb-6">
+            <i data-lucide="cloud-upload" class="w-12 h-12 text-brand-500 mx-auto mb-3"></i>
+            <h3 class="font-bold mb-1">Arraste ficheiros aqui ou clique para carregar</h3>
+            <p class="text-sm text-gray-600 mb-4">PDF, JPG, PNG até 10MB</p>
+            <button class="rounded-full bg-brand-500 hover:bg-brand-600 px-5 py-2 text-sm font-semibold text-white">
+              Selecionar Ficheiros
+            </button>
+          </div>
+
+          <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead class="bg-gray-50 border-b border-gray-200">
+                  <tr>
+                    <th class="text-left px-4 py-3 font-medium text-gray-500">Nome</th>
+                    <th class="text-left px-4 py-3 font-medium text-gray-500 hidden md:table-cell">Tipo</th>
+                    <th class="text-left px-4 py-3 font-medium text-gray-500 hidden lg:table-cell">Data</th>
+                    <th class="text-left px-4 py-3 font-medium text-gray-500">Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${[
+                            { name: 'Fatura FT 2024/245.pdf', type: 'Fatura', date: '15/11/2024', status: 'VALIDATED', badge: 'badge-approved' },
+                            { name: 'Extrato BAI Nov.pdf', type: 'Extrato', date: '14/11/2024', status: 'PROCESSING', badge: 'badge-processing' },
+                            { name: 'Recibo Vencimento José.pdf', type: 'Salário', date: '13/11/2024', status: 'PENDING_REVIEW', badge: 'badge-pending' },
+                            { name: 'Contrato Fornecedor XYZ.pdf', type: 'Contrato', date: '12/11/2024', status: 'VALIDATED', badge: 'badge-approved' },
+                        ].map(d => `
+                    <tr class="border-b border-gray-100 hover:bg-gray-50">
+                      <td class="px-4 py-3">
+                        <div class="flex items-center gap-3">
+                          <i data-lucide="file-text" class="w-5 h-5 text-gray-400"></i>
+                          <span class="font-medium">${d.name}</span>
+                        </div>
+                      </td>
+                      <td class="px-4 py-3 text-gray-600 hidden md:table-cell">${d.type}</td>
+                      <td class="px-4 py-3 text-gray-600 hidden lg:table-cell">${d.date}</td>
+                      <td class="px-4 py-3"><span class="badge ${d.badge}">${d.status}</span></td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `,
+
+                    'faturas': () => `
+          <div class="mb-6"><h1 class="text-3xl font-bold mb-1">Faturas</h1><p class="text-gray-600">Gerir faturas emitidas.</p></div>
+          <div class="rounded-2xl border border-gray-200 bg-white p-8 text-center">
+            <i data-lucide="receipt" class="w-16 h-16 text-brand-500 mx-auto mb-4"></i>
+            <h3 class="text-xl font-bold mb-2">Módulo de Faturas</h3>
+            <p class="text-gray-600">Gestão completa de faturas emitidas e recebidas.</p>
+          </div>
+        `,
+                    'despesas': () => `
+          <div class="mb-6"><h1 class="text-3xl font-bold mb-1">Despesas</h1><p class="text-gray-600">Registar e gerir despesas.</p></div>
+          <div class="rounded-2xl border border-gray-200 bg-white p-8 text-center">
+            <i data-lucide="credit-card" class="w-16 h-16 text-brand-500 mx-auto mb-4"></i>
+            <h3 class="text-xl font-bold mb-2">Módulo de Despesas</h3>
+          </div>
+        `,
+                    'obrigacoes': () => `
+          <div class="mb-6"><h1 class="text-3xl font-bold mb-1">Obrigações Fiscais</h1><p class="text-gray-600">Calendário AGT e INSS.</p></div>
+          <div class="space-y-3">
+            ${[
+                            { name: 'IVA — Novembro 2024', deadline: '20/12/2024', days: 5, badge: 'badge-rejected' },
+                            { name: 'Retenções IRT', deadline: '15/12/2024', days: 12, badge: 'badge-pending' },
+                            { name: 'INSS Novembro', deadline: '30/11/2024', days: 20, badge: 'badge-pending' },
+                        ].map(o => `
+              <div class="rounded-2xl border border-gray-200 bg-white p-5">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h3 class="font-bold">${o.name}</h3>
+                    <p class="text-sm text-gray-500">Prazo: ${o.deadline}</p>
+                  </div>
+                  <span class="badge ${o.badge}">${o.days} dias</span>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `,
+                    'relatorios': () => `
+          <div class="mb-6"><h1 class="text-3xl font-bold mb-1">Relatórios</h1><p class="text-gray-600">Relatórios financeiros.</p></div>
+          <div class="grid md:grid-cols-3 gap-4">
+            ${['Demonstração de Resultados', 'Balanço', 'Fluxo de Caixa', 'Mapa de Receitas', 'Mapa de Despesas', 'Relatórios Fiscais'].map(r => `
+              <div class="rounded-2xl border border-gray-200 bg-white p-5 hover:border-brand-500 transition">
+                <div class="w-11 h-11 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center mb-3">
+                  <i data-lucide="file-bar-chart" class="w-5 h-5"></i>
+                </div>
+                <h3 class="font-bold mb-2">${r}</h3>
+                <button class="text-sm text-brand-500 hover:underline">Descarregar</button>
+              </div>
+            `).join('')}
+          </div>
+        `,
+                    'salarios': () => `
+          <div class="mb-6"><h1 class="text-3xl font-bold mb-1">Salários</h1><p class="text-gray-600">Processamento salarial.</p></div>
+          <div class="rounded-2xl border border-gray-200 bg-white p-8 text-center">
+            <i data-lucide="users" class="w-16 h-16 text-brand-500 mx-auto mb-4"></i>
+            <h3 class="text-xl font-bold mb-2">12 Funcionários Ativos</h3>
+            <p class="text-gray-600">Gestão de folha salarial mensal.</p>
+          </div>
+        `,
+                    'mensagens': () => `
+          <div class="mb-6"><h1 class="text-3xl font-bold mb-1">Mensagens</h1><p class="text-gray-600">Comunicação com contabilista.</p></div>
+          <div class="rounded-2xl border border-gray-200 bg-white p-8 text-center">
+            <i data-lucide="message-square" class="w-16 h-16 text-brand-500 mx-auto mb-4"></i>
+            <p class="text-gray-600">Chat com o seu contabilista.</p>
+          </div>
+        `,
+                    'pedidos': () => `
+          <div class="mb-6"><h1 class="text-3xl font-bold mb-1">Pedidos</h1></div>
+          <div class="rounded-2xl border border-gray-200 bg-white p-8 text-center">
+            <i data-lucide="inbox" class="w-16 h-16 text-brand-500 mx-auto mb-4"></i>
+          </div>
+        `,
+                    'empresas': () => `
+          <div class="mb-6"><h1 class="text-3xl font-bold mb-1">Empresas</h1></div>
+          <div class="rounded-2xl border-2 border-brand-500 bg-white p-6">
+            <h3 class="font-bold text-lg mb-2">Empresa ABC, Lda</h3>
+            <p class="text-sm text-gray-500">NIF: 5417004860</p>
+          </div>
+        `,
+                    'equipa': () => `
+          <div class="mb-6"><h1 class="text-3xl font-bold mb-1">Equipa</h1></div>
+          <div class="rounded-2xl border border-gray-200 bg-white p-6">
+            <p class="text-gray-600">Gerir utilizadores da empresa.</p>
+          </div>
+        `,
+                    'perfil': () => `
+          <div class="mb-6"><h1 class="text-3xl font-bold mb-1">Definições</h1></div>
+          <div class="rounded-2xl border border-gray-200 bg-white p-6">
+            <h3 class="font-bold mb-4">Dados Pessoais</h3>
+            <p class="text-gray-600">João Silva • cliente@empresa.ao</p>
+          </div>
+        `,
+
+                    'admin-dashboard': () => `
+          <div class="mb-6"><h1 class="text-3xl font-bold mb-1">Dashboard Admin</h1><p class="text-gray-600">Visão geral da plataforma.</p></div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            ${[
+                            { label: 'Clientes', value: '54', icon: 'users', color: 'brand' },
+                            { label: 'Leads', value: '12', icon: 'target', color: 'gold' },
+                            { label: 'Docs pendentes', value: '87', icon: 'file-clock', color: 'danger' },
+                            { label: 'Receita mês', value: 'Kz 8.5M', icon: 'trending-up', color: 'secondary' },
+                        ].map(s => `
+              <div class="stat-card rounded-2xl border border-gray-200 bg-white p-5">
+                <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-3 ${s.color === 'gold' ? 'bg-gold-500/10 text-gold-600' : s.color === 'danger' ? 'bg-red-50 text-danger' : s.color === 'brand' ? 'bg-brand-50 text-brand-500' : 'bg-secondary-50 text-secondary-500'}">
+                  <i data-lucide="${s.icon}" class="w-5 h-5"></i>
+                </div>
+                <p class="text-sm text-gray-500 mb-1">${s.label}</p>
+                <p class="text-2xl font-bold">${s.value}</p>
+              </div>
+            `).join('')}
+          </div>
+          <div class="rounded-2xl border border-gray-200 bg-white p-6">
+            <h3 class="font-bold mb-4">Crescimento</h3>
+            <div class="h-48 flex items-end justify-between gap-2">
+              ${[35, 42, 38, 48, 52, 58, 54, 62, 68, 71, 75, 54].map((v, i) => `
+                <div class="flex-1 flex flex-col items-center gap-2">
+                  <div class="w-full bar-3d" style="height: ${v * 2}px"></div>
+                  <span class="text-xs text-gray-500">${['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'][i]}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `,
+                    'admin-clientes': () => `
+          <div class="mb-6"><h1 class="text-3xl font-bold mb-1">Clientes</h1></div>
+          <div class="rounded-2xl border border-gray-200 bg-white p-6">
+            <p class="text-gray-600">54 clientes ativos.</p>
+          </div>
+        `,
+                    'admin-leads': () => `<div class="mb-6"><h1 class="text-3xl font-bold">Leads / CRM</h1></div><div class="rounded-2xl border border-gray-200 bg-white p-6"><p class="text-gray-600">Pipeline comercial.</p></div>`,
+                    'admin-empresas': () => `<div class="mb-6"><h1 class="text-3xl font-bold">Empresas</h1></div><div class="rounded-2xl border border-gray-200 bg-white p-6"><p class="text-gray-600">Todas as empresas.</p></div>`,
+                    'admin-documentos': () => `<div class="mb-6"><h1 class="text-3xl font-bold">Documentos</h1></div><div class="rounded-2xl border border-gray-200 bg-white p-6"><p class="text-gray-600">Documentos para validação.</p></div>`,
+                    'admin-obrigacoes': () => `<div class="mb-6"><h1 class="text-3xl font-bold">Obrigações</h1></div><div class="rounded-2xl border border-gray-200 bg-white p-6"><p class="text-gray-600">Vista global.</p></div>`,
+                    'admin-mensagens': () => `<div class="mb-6"><h1 class="text-3xl font-bold">Mensagens</h1></div><div class="rounded-2xl border border-gray-200 bg-white p-6"><p class="text-gray-600">Conversas.</p></div>`,
+                    'admin-utilizadores': () => `<div class="mb-6"><h1 class="text-3xl font-bold">Utilizadores</h1></div><div class="rounded-2xl border border-gray-200 bg-white p-6"><p class="text-gray-600">Equipa interna.</p></div>`,
+                    'admin-auditoria': () => `<div class="mb-6"><h1 class="text-3xl font-bold">Auditoria</h1></div><div class="rounded-2xl border border-gray-200 bg-white p-6"><p class="text-gray-600">Logs de operações.</p></div>`,
+                    'admin-configuracoes': () => `<div class="mb-6"><h1 class="text-3xl font-bold">Configurações</h1></div><div class="rounded-2xl border border-gray-200 bg-white p-6"><p class="text-gray-600">Definições da plataforma.</p></div>`,
+                };
+
+                content.innerHTML = pages[page] ? pages[page]() : `<div class="text-center py-12"><h2 class="text-2xl font-bold">Em desenvolvimento</h2></div>`;
+                lucide.createIcons();
+                window.scrollTo(0, 0);
+            }
+
+            // Inicializar
+            renderServices();
+            renderSolutions();
+            renderSteps();
+            renderBenefits();
+            renderTestimonials();
+            renderResources();
+            renderFAQ();
+            lucide.createIcons();
+        </script>
+
+    </body>
+
+    </html>
+</parameter>
+<parameter name="version_uuid">a3f8e2d1-9c4b-4f7e-a12b-8d5e9f2c1b3a</parameter>
+</function_calls>
